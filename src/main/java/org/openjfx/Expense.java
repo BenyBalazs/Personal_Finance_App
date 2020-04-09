@@ -48,4 +48,14 @@ public class Expense {
     public void setDayOfAdd(LocalDate dayOfAdd) {
         DayOfAdd = dayOfAdd;
     }
+
+    @Override
+    public String toString() {
+        return "Expense{" +
+                "PrimaryKey=" + PrimaryKey +
+                ", Name='" + Name + '\'' +
+                ", Amount=" + Amount +
+                ", DayOfAdd=" + DayOfAdd +
+                '}';
+    }
 }

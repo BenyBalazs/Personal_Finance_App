@@ -48,4 +48,14 @@ public class Income {
     public void setTime(LocalDate dayOfAdd) {
         DayOfAdd = dayOfAdd;
     }
+
+    @Override
+    public String toString() {
+        return "Income{" +
+                "PrimaryKey=" + PrimaryKey +
+                ", Name='" + Name + '\'' +
+                ", Amount=" + Amount +
+                ", DayOfAdd=" + DayOfAdd +
+                '}';
+    }
 }
