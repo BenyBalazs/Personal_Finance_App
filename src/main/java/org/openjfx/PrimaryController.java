@@ -2,6 +2,7 @@ package org.openjfx;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javafx.event.ActionEvent;
@@ -21,6 +22,8 @@ public class PrimaryController {
     Spinner moneySpinner;
     @FXML
     Button addButton;
+    @FXML
+    Label test;
 
     @FXML
     private void setDefaultDateTime(){
@@ -30,14 +33,16 @@ public class PrimaryController {
     @FXML
     public void addElementToList(ActionEvent actionEvent) {
 
-        if (expenseOrIncome.getSelectionModel().equals("Kiadás")){
+        if (expenseOrIncome.getValue().toString().equals("Kiadás")){
             Storage.getExpenses()
                     .add(new Expense(Storage.getPrimaryKeyForExpenses(),idSelector.getSelectionModel().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue()));
+
         }
         else {
             Storage.getIncomes()
-                    .add(new Income(Storage.getPrimaryKeyForExpenses(),idSelector.getSelectionModel().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue()));
+                    .add(new Income(Storage.getPrimaryKeyForIncomes(),idSelector.getSelectionModel().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue()));
         }
+        test.setText("Kiadások " + Storage.primaryKeyForExpenses + " asdasd " + Storage.primaryKeyForIncomes );
 
     }
 }

@@ -6,8 +6,8 @@ public final class Storage {
 
     static ArrayList<Expense> Expenses = new ArrayList<Expense>() ;
     static ArrayList<Income> Incomes = new ArrayList<Income>();;
-    static Integer primaryKeyForExpenses = 0;
-    static Integer primaryKeyForIncomes = 0;
+    public static Integer primaryKeyForExpenses = 0;
+    public static Integer primaryKeyForIncomes = 0;
 
     public static Integer getPrimaryKeyForExpenses() {
         primaryKeyForExpenses++;
