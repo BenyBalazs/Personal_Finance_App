@@ -7,6 +7,8 @@ import java.util.Calendar;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.skin.DatePickerSkin;
 
@@ -28,10 +30,8 @@ public class PrimaryController {
     ListView myList;
 
     @FXML
-    private void setDefaultDateTime(){
+    Button editButton;
 
-        dateDatePicker.setValue(LocalDate.now());
-    }
     @FXML
     public void addElementToList(ActionEvent actionEvent) {
 
@@ -48,5 +48,12 @@ public class PrimaryController {
         }
         test.setText("Kiadások " + Storage.primaryKeyForExpenses + " asdasd " + Storage.primaryKeyForIncomes );
 
+    }
+    @FXML
+    public void openEditWindow(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("EditWindow"));
+        }catch (Exception e){ }
     }
 }

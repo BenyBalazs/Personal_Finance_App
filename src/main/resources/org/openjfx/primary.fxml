@@ -65,13 +65,19 @@
          </children>
       </HBox>
       <Separator prefHeight="28.0" prefWidth="699.0" />
-      <HBox prefHeight="228.0" prefWidth="699.0">
+      <HBox prefHeight="248.0" prefWidth="822.0">
          <children>
-            <AnchorPane prefHeight="228.0" prefWidth="434.0">
+            <VBox alignment="CENTER">
                <children>
-                  <ListView fx:id="myList" prefHeight="200.0" prefWidth="408.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
+                  <AnchorPane prefHeight="228.0" prefWidth="434.0">
+                     <children>
+                        <ListView fx:id="myList" prefHeight="200.0" prefWidth="408.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
+                     </children>
+                  </AnchorPane>
+                  <Separator prefHeight="22.0" prefWidth="434.0" />
+                  <Button fx:id="editButton" mnemonicParsing="false" text="Szerkesztés" textAlignment="CENTER" onAction="#openEditWindow" />
                </children>
-            </AnchorPane>
+            </VBox>
             <Label fx:id="test" prefHeight="227.0" prefWidth="176.0" text="Label" />
             <Label text="Label" />
          </children>
