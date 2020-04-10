@@ -24,6 +24,8 @@ public class PrimaryController {
     Button addButton;
     @FXML
     Label test;
+    @FXML
+    ListView myList;
 
     @FXML
     private void setDefaultDateTime(){
@@ -34,13 +36,15 @@ public class PrimaryController {
     public void addElementToList(ActionEvent actionEvent) {
 
         if (expenseOrIncome.getValue().toString().equals("Kiadás")){
-            Storage.getExpenses()
-                    .add(new Expense(Storage.getPrimaryKeyForExpenses(),idSelector.getSelectionModel().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue()));
+            Expense tmp = new Expense(Storage.getPrimaryKeyForExpenses(),idSelector.getValue().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue());
+            Storage.getExpenses().add(tmp);
+            myList.getItems().add(tmp.toString());
 
         }
         else {
-            Storage.getIncomes()
-                    .add(new Income(Storage.getPrimaryKeyForIncomes(),idSelector.getSelectionModel().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue()));
+            Income tmp = new Income(Storage.getPrimaryKeyForIncomes(),idSelector.getValue().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue());
+            Storage.getIncomes().add(tmp);
+            myList.getItems().add(tmp.toString());
         }
         test.setText("Kiadások " + Storage.primaryKeyForExpenses + " asdasd " + Storage.primaryKeyForIncomes );
 
