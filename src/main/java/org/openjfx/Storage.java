@@ -2,40 +2,69 @@ package org.openjfx;
 
 import java.util.ArrayList;
 
-public final class Storage {
+class Storage {
 
-    static ArrayList<Expense> Expenses = new ArrayList<Expense>() ;
-    static ArrayList<Income> Incomes = new ArrayList<Income>();;
-    public static Integer primaryKeyForExpenses = 0;
-    public static Integer primaryKeyForIncomes = 0;
+    ArrayList<Expense> Expenses = new ArrayList<Expense>() ;
+    ArrayList<Income> Incomes = new ArrayList<Income>();;
+    public Integer primaryKeyForExpenses = 0;
+    public Integer primaryKeyForIncomes = 0;
 
-    public static Integer getPrimaryKeyForExpenses() {
+    Integer Balance = getTheSumOfIncomes() - getTheSumOfExpenses();
+
+    public Storage() {
+
+    }
+
+    private Integer getTheSumOfExpenses(){
+        Integer tmp = 0;
+
+        for (int i = 0; i < Expenses.size(); i++){
+            tmp += Expenses.get(i).Amount;
+        }
+        return tmp;
+    }
+
+    private Integer getTheSumOfIncomes(){
+        Integer tmp = 0;
+
+        for (int i = 0; i < Incomes.size(); i++){
+            tmp += Incomes.get(i).Amount;
+        }
+        return tmp;
+    }
+
+    public Integer getPrimaryKeyForExpenses() {
         primaryKeyForExpenses++;
         return primaryKeyForExpenses;
     }
 
-    public static Integer getPrimaryKeyForIncomes() {
+    public Integer getPrimaryKeyForIncomes() {
         primaryKeyForIncomes++;
         return primaryKeyForIncomes;
     }
 
-    public static ArrayList<Expense> getExpenses() {
+    public ArrayList<Expense> getExpenses() {
         return Expenses;
     }
 
-    public static void setExpenses(ArrayList<Expense> expenses) {
+    public void setExpenses(ArrayList<Expense> expenses) {
         Expenses = expenses;
     }
 
-    public static ArrayList<Income> getIncomes() {
+    public ArrayList<Income> getIncomes() {
         return Incomes;
     }
 
-    public static void setIncomes(ArrayList<Income> incomes) {
+    public void setIncomes(ArrayList<Income> incomes) {
         Incomes = incomes;
     }
 
-    private Storage() {
-
+    public Integer getSumOfExpenses() {
+        return getTheSumOfExpenses();
     }
+
+    public Integer getSumOfIncomes() {
+        return getTheSumOfIncomes();
+    }
+
 }

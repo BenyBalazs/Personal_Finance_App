@@ -47,17 +47,17 @@ public class PrimaryController {
 
         try{
         if (expenseOrIncome.getValue().toString().equals("Kiadás")){
-            Expense tmp = new Expense(Storage.getPrimaryKeyForExpenses(),idSelector.getValue().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue());
-            Storage.getExpenses().add(tmp);
+            Expense tmp = new Expense(Loader.storage.getPrimaryKeyForExpenses(),idSelector.getValue().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue());
+            Loader.storage.getExpenses().add(tmp);
             myList.getItems().add(tmp.toString());
 
         }
         else {
-            Income tmp = new Income(Storage.getPrimaryKeyForIncomes(),idSelector.getValue().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue());
-            Storage.getIncomes().add(tmp);
+            Income tmp = new Income(Loader.storage.getPrimaryKeyForIncomes(),idSelector.getValue().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue());
+            Loader.storage.getIncomes().add(tmp);
             myList.getItems().add(tmp.toString());
         }
-        test.setText("Kiadások " + Storage.primaryKeyForExpenses + " asdasd " + Storage.primaryKeyForIncomes );
+        test.setText("Expenses: " + Loader.storage.getSumOfExpenses() + "Bevételek: " + Loader.storage.getSumOfIncomes() );
 
         } catch (Exception e) {
             logger.error("Something went wrong during the creation of elements ", e);
