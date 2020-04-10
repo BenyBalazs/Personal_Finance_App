@@ -1,5 +1,6 @@
 package org.openjfx;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,15 +16,18 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
-    private static Scene editWindow;
 
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"));
         stage.setScene(scene);
+        stage.setTitle("Kiadásaim");
         stage.show();
 
     }
+
+
+
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));

@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import javafx.stage.Modality;
+import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.Logger;
 
@@ -42,6 +45,7 @@ public class PrimaryController {
     @FXML
     public void addElementToList(ActionEvent actionEvent) {
 
+        try{
         if (expenseOrIncome.getValue().toString().equals("Kiadás")){
             Expense tmp = new Expense(Storage.getPrimaryKeyForExpenses(),idSelector.getValue().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue());
             Storage.getExpenses().add(tmp);
@@ -55,18 +59,21 @@ public class PrimaryController {
         }
         test.setText("Kiadások " + Storage.primaryKeyForExpenses + " asdasd " + Storage.primaryKeyForIncomes );
 
+        } catch (Exception e) {
+            logger.error("Something went wrong during the creation of elements ", e);
+        }
     }
+
     @FXML
     public void openEditWindow(){
         logger.trace("Function called openEditWindow");
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("EditWindow"));
-            Scene scene2 = new Scene(loader.load(), 600,400);
-            Stage stage2 = new Stage();
-            stage2.setScene(scene2);
-            stage2.show();
-
+            Parent part = FXMLLoader.load(App.class.getResource("EditWindow.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(part);
+            stage.setScene(scene);
+            stage.setTitle("Szerkesztés");
+            stage.show();
         }catch (Exception e){
             logger.error("Error when trying to open new window: " ,e);
         }
