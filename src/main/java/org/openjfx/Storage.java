@@ -9,7 +9,7 @@ class Storage {
     public Integer primaryKeyForExpenses = 0;
     public Integer primaryKeyForIncomes = 0;
 
-    Integer Balance = getTheSumOfIncomes() - getTheSumOfExpenses();
+    Integer Balance(){ return getTheSumOfIncomes() - getTheSumOfExpenses();}
 
     public Storage() {
 
@@ -66,5 +66,7 @@ class Storage {
     public Integer getSumOfIncomes() {
         return getTheSumOfIncomes();
     }
+
+    public Integer getBalance(){return Balance();}
 
 }

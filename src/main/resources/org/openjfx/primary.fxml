@@ -75,12 +75,21 @@
                      </children>
                   </AnchorPane>
                   <Separator prefHeight="22.0" prefWidth="434.0" />
-                  <Button fx:id="editButton" mnemonicParsing="false" text="Szerkesztés" textAlignment="CENTER" onAction="#openEditWindow" />
+                  <Button fx:id="editButton" mnemonicParsing="false" onAction="#openEditWindow" text="Szerkesztés" textAlignment="CENTER" />
                </children>
             </VBox>
             <Label fx:id="test" prefHeight="227.0" prefWidth="176.0" text="Label" />
-            <Label text="Label" />
+            <Label text="Label" fx:id="Balance"/>
          </children>
       </HBox>
+      <TilePane alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="19.0" prefWidth="822.0">
+               <children>
+                  <Label text="Label" fx:id="warnMessage" AnchorPane.topAnchor="0" visible="true"/>
+               </children>
+            </AnchorPane>
+         </children>
+      </TilePane>
    </children>
 </VBox>

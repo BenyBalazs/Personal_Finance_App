@@ -37,15 +37,24 @@ public class PrimaryController {
     Label test;
     @FXML
     ListView myList;
-
     @FXML
     Button editButton;
+    @FXML
+    Label Balance;
 
+    void warnMessage(String s){
+        idSelector.setStyle("-fx-border-color: firebrick ");
+        try {
+            wait(100);
+        }catch (Exception e){logger.error("Oops");}
+        idSelector.setStyle("");
+    }
 
     @FXML
-    public void addElementToList(ActionEvent actionEvent) {
+    public void addElementToList() {
 
         try{
+
         if (expenseOrIncome.getValue().toString().equals("Kiadás")){
             Expense tmp = new Expense(Loader.storage.getPrimaryKeyForExpenses(),idSelector.getValue().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue());
             Loader.storage.getExpenses().add(tmp);
@@ -53,14 +62,18 @@ public class PrimaryController {
 
         }
         else {
-            Income tmp = new Income(Loader.storage.getPrimaryKeyForIncomes(),idSelector.getValue().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue());
+            Income tmp = new Income(Loader.storage.getPrimaryKeyForExpenses(),idSelector.getValue().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue());
             Loader.storage.getIncomes().add(tmp);
             myList.getItems().add(tmp.toString());
         }
         test.setText("Expenses: " + Loader.storage.getSumOfExpenses() + "Bevételek: " + Loader.storage.getSumOfIncomes() );
+        Balance.setText(Loader.storage.getBalance().toString());
 
-        } catch (Exception e) {
-            logger.error("Something went wrong during the creation of elements ", e);
+
+        } catch (NullPointerException e) {
+            logger.error("No id found ", e);
+        } catch (Exception e){
+            logger.error("@Something went wrong {}", e);
         }
     }
 
