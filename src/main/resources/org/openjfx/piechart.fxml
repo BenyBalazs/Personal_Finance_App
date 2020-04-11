@@ -21,7 +21,7 @@
          </children></AnchorPane>
       <HBox>
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" text="Button" />
+            <Button alignment="CENTER" mnemonicParsing="false" text="Diagramm Elkészítése"  onAction="#addElementsToChart"/>
          </children>
       </HBox>
    </children>

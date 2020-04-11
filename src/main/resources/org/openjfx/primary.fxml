@@ -79,14 +79,19 @@
                </children>
             </VBox>
             <Label fx:id="test" prefHeight="227.0" prefWidth="176.0" text="Label" />
-            <Label text="Label" fx:id="Balance"/>
+            <Label fx:id="Balance" prefHeight="18.0" prefWidth="43.0" text="Label" />
+            <VBox alignment="BOTTOM_CENTER">
+               <children>
+                  <Button mnemonicParsing="false" text="Kördiagramm Megnyitása" fx:id="pieChartOpener" onAction="#openPieChartWindow"/>
+               </children>
+            </VBox>
          </children>
       </HBox>
       <TilePane alignment="CENTER">
          <children>
             <AnchorPane prefHeight="19.0" prefWidth="822.0">
                <children>
-                  <Label text="Label" fx:id="warnMessage" AnchorPane.topAnchor="0" visible="true"/>
+                  <Label fx:id="warnMessage" text="Label" visible="true" AnchorPane.topAnchor="0" />
                </children>
             </AnchorPane>
          </children>

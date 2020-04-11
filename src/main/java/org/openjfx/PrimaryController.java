@@ -41,6 +41,8 @@ public class PrimaryController {
     Button editButton;
     @FXML
     Label Balance;
+    @FXML
+    Button pieChartOpener;
 
     void warnMessage(String s){
         idSelector.setStyle("-fx-border-color: firebrick ");
@@ -91,7 +93,21 @@ public class PrimaryController {
             stage.setTitle("Szerkesztés");
             stage.show();
         }catch (Exception e){
-            logger.error("Error when trying to open new window: " ,e);
+            logger.error("Error when trying to open new EditWindow: " ,e);
+        }
+    }
+
+    @FXML
+    public void openPieChartWindow(){
+        try{
+            Parent part = FXMLLoader.load(App.class.getResource("piechart.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(part);
+            stage.setScene(scene);
+            stage.setTitle("Megoszlás");
+            stage.show();
+        }catch (Exception e) {
+            logger.error("Error when trying to PieChartWindow: " ,e);
         }
     }
 }
