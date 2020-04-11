@@ -1,10 +1,6 @@
 package org.openjfx;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 class Storage {
 
@@ -20,22 +16,25 @@ class Storage {
 
     }
 
-    public void getTheSumOfDistinctExpenses(){
+    public void getDistributionExpenses(){
 
         String[] myArray = (String[]) Expenses.stream()
                 .map(Expense::getName).distinct().toArray();
-        ArrayList<Distribution> eDist = mapInitializer(myArray);
+        eDist = mapInitializer(myArray);
 
        for (int i = 0; i< eDist.size(); i++)
         for (int j = 0; i < myArray.length; j++) {
             try {
-                if (myArray[j].equals(eDist.get(j).getName()))
+                if (myArray[j].equals(eDist.get(j).getName())){
                     eDist.get(i).setAmount(mapValueLoader(myArray[i]));
+                    eDist.get(i).setPercentage((double) (mapValueLoader(myArray[i])/getSumOfExpenses()));
+                }
             } catch (Exception e) { }
         }
+
     }
 
-    ArrayList<Distribution> mapInitializer (String[] myArray){
+    private ArrayList<Distribution> mapInitializer (String[] myArray){
 
         ArrayList<Distribution> tmp = new ArrayList<>();
         for(int i = 0; myArray.length > i ; i++ ){
@@ -45,7 +44,7 @@ class Storage {
         return tmp;
     }
 
-    Integer mapValueLoader (String name){
+    private Integer mapValueLoader (String name){
 
        Integer sum = Expenses.stream()
                .filter(Expense -> Expense.getName() == name)

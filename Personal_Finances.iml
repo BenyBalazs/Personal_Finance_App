@@ -22,6 +22,7 @@
     <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.10" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains:annotations:19.0.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.tinylog:tinylog-api:2.1.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.tinylog:tinylog-impl:2.1.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.tinylog:slf4j-tinylog:2.1.0" level="project" />

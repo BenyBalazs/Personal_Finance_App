@@ -4,9 +4,9 @@ import javafx.scene.control.DatePicker;
 
  class Distribution {
 
-    String Name;
-    Integer Amount;
-    Double Percentage;
+    private String Name;
+    private Integer Amount;
+    private Double Percentage;
 
     public Distribution(String name, Integer amount){
         Name = name;
@@ -24,4 +24,16 @@ import javafx.scene.control.DatePicker;
     public void setAmount(Integer amount) {
         Amount = amount;
     }
-}
+
+     public void setName(String name) {
+         Name = name;
+     }
+
+     public Double getPercentage() {
+         return Percentage;
+     }
+
+     public void setPercentage(Double percentage) {
+         Percentage = percentage;
+     }
+ }
