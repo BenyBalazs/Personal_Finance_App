@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.PieChartController">
+   <children>
+      <TextFlow prefHeight="37.0" prefWidth="600.0" textAlignment="CENTER">
+         <children>
+            <Label text="Megoszlás">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+         </children></TextFlow>
+      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <PieChart prefHeight="400.0" prefWidth="600.0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0" fx:id="pieChart"/>
+         </children></AnchorPane>
+      <HBox>
+         <children>
+            <Button alignment="CENTER" mnemonicParsing="false" text="Button" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

@@ -114,4 +114,7 @@ class Storage {
 
     public Integer getBalance(){return Balance();}
 
+    public ArrayList<Distribution> getDist() {
+        return eDist;
+    }
 }
