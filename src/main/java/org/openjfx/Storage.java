@@ -1,12 +1,19 @@
 package org.openjfx;
 
+import org.slf4j.ILoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 class Storage {
 
-    ArrayList<Expense> Expenses = new ArrayList<Expense>() ;
-    ArrayList<Income> Incomes = new ArrayList<Income>();
-    ArrayList<Distribution> eDist;
+    private static Logger logger = LoggerFactory.getLogger("App.class");
+
+    private ArrayList<Expense> Expenses = new ArrayList<Expense>() ;
+    private ArrayList<Income> Incomes = new ArrayList<Income>();
+    private ArrayList<Distribution> eDist;
     public Integer primaryKeyForExpenses = 0;
     public Integer primaryKeyForIncomes = 0;
 
@@ -18,19 +25,24 @@ class Storage {
 
     public void getDistributionExpenses(){
 
-        String[] myArray = (String[]) Expenses.stream()
-                .map(Expense::getName).distinct().toArray();
+        String[] myArray =  Expenses.stream()
+                .map(Expense::getName).distinct().toArray(String[]::new);
         eDist = mapInitializer(myArray);
 
-       for (int i = 0; i< eDist.size(); i++)
-        for (int j = 0; i < myArray.length; j++) {
-            try {
-                if (myArray[j].equals(eDist.get(j).getName())){
-                    eDist.get(i).setAmount(mapValueLoader(myArray[i]));
-                    eDist.get(i).setPercentage((double) (mapValueLoader(myArray[i])/getSumOfExpenses()));
-                }
-            } catch (Exception e) { }
-        }
+       for (int i = 0; i< eDist.size(); i++) {
+           for (int j = 0; j < myArray.length; j++) {
+               try {
+                   if (myArray[j].equals(eDist.get(i).getName())) {
+                       eDist.get(i).setAmount(mapValueLoader(myArray[i]));
+                       eDist.get(i).setPercentage((double) (mapValueLoader(myArray[i]) / getSumOfExpenses()));
+                   }
+               } catch (Exception e) {
+               }
+           }
+       }
+       for (int i = 0; i<eDist.size();i++){
+           logger.debug("Elements in eDist ArrayList" + eDist.get(i).toString());
+       }
 
     }
 
@@ -46,10 +58,11 @@ class Storage {
 
     private Integer mapValueLoader (String name){
 
-       Integer sum = Expenses.stream()
+       Integer[] sumArray = Expenses.stream()
                .filter(Expense -> Expense.getName() == name)
-               .map(Expense::getAmount).
-               reduce(0, (a, b) -> a + b);
+               .map(Expense::getAmount).toArray(Integer[]::new);
+       logger.debug("Integers in sumArry" + sumArray );
+       Integer sum = Arrays.stream(sumArray).reduce(0, (a, b) -> a + b);
        return sum;
     }
 
@@ -57,7 +70,7 @@ class Storage {
         Integer tmp = 0;
 
         for (int i = 0; i < Expenses.size(); i++){
-            tmp += Expenses.get(i).Amount;
+            tmp += Expenses.get(i).getAmount();
         }
         return tmp;
     }
@@ -66,7 +79,7 @@ class Storage {
         Integer tmp = 0;
 
         for (int i = 0; i < Incomes.size(); i++){
-            tmp += Incomes.get(i).Amount;
+            tmp += Incomes.get(i).getAmount();
         }
         return tmp;
     }
@@ -85,16 +98,8 @@ class Storage {
         return Expenses;
     }
 
-    public void setExpenses(ArrayList<Expense> expenses) {
-        Expenses = expenses;
-    }
-
     public ArrayList<Income> getIncomes() {
         return Incomes;
-    }
-
-    public void setIncomes(ArrayList<Income> incomes) {
-        Incomes = incomes;
     }
 
     public Integer getSumOfExpenses() {

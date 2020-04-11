@@ -36,4 +36,13 @@ import javafx.scene.control.DatePicker;
      public void setPercentage(Double percentage) {
          Percentage = percentage;
      }
+
+     @Override
+     public String toString() {
+         return "Distribution{" +
+                 "Name='" + Name + '\'' +
+                 ", Amount=" + Amount +
+                 ", Percentage=" + Percentage +
+                 '}';
+     }
  }

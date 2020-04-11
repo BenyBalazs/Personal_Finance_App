@@ -70,6 +70,7 @@ public class PrimaryController {
         }
         test.setText("Expenses: " + Loader.storage.getSumOfExpenses() + "Bevételek: " + Loader.storage.getSumOfIncomes() );
         Balance.setText(Loader.storage.getBalance().toString());
+        Loader.storage.getDistributionExpenses();
 
 
         } catch (NullPointerException e) {

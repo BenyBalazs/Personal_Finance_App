@@ -3,12 +3,12 @@ package org.openjfx;
 import java.time.LocalDate;
 import java.util.Calendar;
 
-public class Expense{
+ class Expense{
 
-    Integer PrimaryKey;
-    String Name;
-    Integer Amount;
-    LocalDate DayOfAdd;
+   private Integer PrimaryKey;
+   private String Name;
+   private Integer Amount;
+   private LocalDate DayOfAdd;
 
     public Expense(Integer primaryKey, String name, Integer amount, LocalDate dayOfAdd) {
         PrimaryKey = primaryKey;
