@@ -15,8 +15,6 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-
-
     private static Scene scene;
 
     @Override
@@ -27,7 +25,6 @@ public class App extends Application {
         stage.show();
 
     }
-
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));

@@ -3,7 +3,7 @@ package org.openjfx;
 import java.time.LocalDate;
 import java.util.Calendar;
 
-public class Expense {
+public class Expense{
 
     Integer PrimaryKey;
     String Name;
