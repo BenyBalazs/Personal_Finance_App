@@ -34,7 +34,9 @@ class Storage {
                try {
                    if (myArray[j].equals(eDist.get(i).getName())) {
                        eDist.get(i).setAmount(mapValueLoader(myArray[i]));
-                       eDist.get(i).setPercentage((double) (mapValueLoader(myArray[i]) / getSumOfExpenses()));
+                       double tmp1 = mapValueLoader(myArray[i]);
+                       double tmp2 = getTheSumOfExpenses();
+                       eDist.get(i).setPercentage( tmp1/tmp2*100 );
                    }
                } catch (Exception e) {
                }
