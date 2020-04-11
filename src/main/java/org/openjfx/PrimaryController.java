@@ -56,14 +56,14 @@ public class PrimaryController {
         try{
 
         if (expenseOrIncome.getValue().toString().equals("Kiadás")){
-            Expense tmp = new Expense(Loader.storage.getPrimaryKeyForExpenses(),
+            Expense tmp = new Expense('E',Loader.storage.getPrimaryKeyForExpenses(),
                     idSelector.getValue().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue());
             Loader.storage.getExpenses().add(tmp);
             myList.getItems().add(tmp.toString());
 
         }
         else {
-            Income tmp = new Income(Loader.storage.getPrimaryKeyForIncomes(),
+            Income tmp = new Income('I', Loader.storage.getPrimaryKeyForIncomes(),
                     idSelector.getValue().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue());
             Loader.storage.getIncomes().add(tmp);
             myList.getItems().add(tmp.toString());

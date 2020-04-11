@@ -5,12 +5,14 @@ import java.util.Calendar;
 
 class Income {
 
+    private Character Type;
     private Integer PrimaryKey;
     private String Name;
     private Integer Amount;
     private LocalDate DayOfAdd;
 
-    public Income(Integer primaryKey, String name, Integer amount, LocalDate dayOfAdd) {
+    public Income(Character type, Integer primaryKey, String name, Integer amount, LocalDate dayOfAdd) {
+        Type = type;
         PrimaryKey = primaryKey;
         Name = name;
         Amount = amount;
