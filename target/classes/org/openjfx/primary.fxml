@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.PrimaryController">
+   <children>
+      <VBox alignment="TOP_CENTER" maxHeight="500" maxWidth="700" minHeight="-Infinity" minWidth="-Infinity" prefHeight="423.0" prefWidth="822.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+         <children>
+            <TextFlow prefHeight="83.0" prefWidth="700.0" textAlignment="CENTER">
+               <children>
+                  <Label fx:id="Title" alignment="CENTER" prefHeight="60.0" prefWidth="271.0" text="Kiadások" textAlignment="CENTER">
+                     <font>
+                        <Font size="56.0" />
+                     </font>
+                  </Label>
+               </children>
+            </TextFlow>
+            <HBox alignment="CENTER" fillHeight="true" prefHeight="50.0" prefWidth="600.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="80.0" text="Kiadás/Bevétel" />
+                        <ChoiceBox fx:id="expenseOrIncome" prefWidth="150.0" value="Kiadás">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="Bevétel" />
+                                 <String fx:value="Kiadás" />
+                              </FXCollections>
+                           </items>
+                        </ChoiceBox>
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="40" prefWidth="20.0" />
+                  <VBox>
+                     <children>
+                        <VBox alignment="CENTER">
+                           <children>
+                              <Label text="Adj hozzá egy új elemet vagy válassz a listából" />
+                              <ComboBox fx:id="idSelector" editable="true" prefHeight="50.0" prefWidth="210.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="20" />
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Label text="Válaszd ki a dátumot" />
+                        <DatePicker fx:id="dateDatePicker" editable="true" />
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="40" prefWidth="20.0" />
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Label text="Írd be az összeget (Ft)" />
+                        <Spinner fx:id="moneySpinner" amountToStepBy="1" editable="true" initialValue="1" min="0">
+                           <valueFactory>
+                           <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" max="999999999" />
+                           </valueFactory>
+                        </Spinner>
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="40" prefWidth="20.0" />
+                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#addElementToList" text="Hozzáad" />
+               </children>
+            </HBox>
+            <Separator prefHeight="28.0" prefWidth="699.0" />
+            <HBox prefHeight="248.0" prefWidth="822.0">
+               <children>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <AnchorPane prefHeight="228.0" prefWidth="434.0">
+                           <children>
+                              <ListView fx:id="myList" prefHeight="200.0" prefWidth="408.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
+                           </children>
+                        </AnchorPane>
+                        <Separator prefHeight="22.0" prefWidth="434.0" />
+                        <Button fx:id="editButton" mnemonicParsing="false" onAction="#openEditWindow" text="Szerkesztés" textAlignment="CENTER" />
+                     </children>
+                  </VBox>
+                  <Label fx:id="test" prefHeight="227.0" prefWidth="176.0" text="Label" />
+                  <Label fx:id="Balance" prefHeight="18.0" prefWidth="43.0" text="Label" />
+                  <VBox alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button fx:id="pieChartOpener" mnemonicParsing="false" onAction="#openPieChartWindow" text="Kördiagramm Megnyitása" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <TilePane alignment="CENTER">
+               <children>
+                  <Label fx:id="labelOfWarnMessage" alignment="CENTER" prefHeight="18.0" prefWidth="829.0" textFill="Crimson" visible="false" />
+               </children>
+            </TilePane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

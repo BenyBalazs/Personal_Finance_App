@@ -1,0 +1,9 @@
+org\openjfx\Distribution.class
+org\openjfx\PrimaryController.class
+org\openjfx\Storage.class
+module-info.class
+org\openjfx\EditWindowController.class
+org\openjfx\SecondaryController.class
+org\openjfx\PieChartController.class
+org\openjfx\Loader.class
+org\openjfx\App.class
