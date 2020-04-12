@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 class Storage {
 
-    private static Logger logger = LoggerFactory.getLogger("App.class");
+    private static Logger logger = LoggerFactory.getLogger("Storage.class");
 
     private ArrayList<Expense> Expenses = new ArrayList<Expense>() ;
     private ArrayList<Income> Incomes = new ArrayList<Income>();

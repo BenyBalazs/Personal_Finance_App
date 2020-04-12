@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 
 public class PrimaryController {
 
-    private static Logger logger = LoggerFactory.getLogger("App.class");
+    private static Logger logger = LoggerFactory.getLogger("PrimaryController.class");
     @FXML
     ChoiceBox expenseOrIncome;
     @FXML
@@ -52,6 +52,7 @@ public class PrimaryController {
         idSelector.setStyle("");
     }
 
+
     @FXML
     public void addElementToList() {
 
@@ -62,6 +63,7 @@ public class PrimaryController {
                     idSelector.getValue().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue());
             Loader.storage.getExpenses().add(tmp);
             myList.getItems().add(tmp.toString());
+            logger.trace("User added a new Expense to the list");
 
         }
         else {
@@ -69,6 +71,7 @@ public class PrimaryController {
                     idSelector.getValue().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue());
             Loader.storage.getIncomes().add(tmp);
             myList.getItems().add(tmp.toString());
+            logger.trace("user added a new Income to the list");
         }
         test.setText("Expenses: " + Loader.storage.getSumOfExpenses() + "Bevételek: " + Loader.storage.getSumOfIncomes() );
         Balance.setText(Loader.storage.getBalance().toString());
@@ -92,6 +95,7 @@ public class PrimaryController {
             stage.setScene(scene);
             stage.setTitle("Szerkesztés");
             stage.show();
+            logger.trace("User opened the EditWindow");
         }catch (Exception e){
             logger.error("Error when trying to open new EditWindow: " ,e);
         }
@@ -106,6 +110,7 @@ public class PrimaryController {
             stage.setScene(scene);
             stage.setTitle("Megoszlás");
             stage.show();
+            logger.trace("User opened the PieChart window");
         }catch (Exception e) {
             logger.error("Error when trying to PieChartWindow: " ,e);
         }

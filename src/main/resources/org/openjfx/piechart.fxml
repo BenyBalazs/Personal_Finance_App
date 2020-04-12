@@ -17,11 +17,11 @@
          </children></TextFlow>
       <AnchorPane prefHeight="400.0" prefWidth="600.0">
          <children>
-            <PieChart prefHeight="400.0" prefWidth="600.0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0" fx:id="pieChart"/>
+            <PieChart prefHeight="400.0" prefWidth="600.0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0" fx:id="pieChart" />
          </children></AnchorPane>
       <HBox>
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" text="Diagramm Elkészítése"  onAction="#addElementsToChart"/>
+            <Button alignment="CENTER" mnemonicParsing="false" text="Diagramm Frissítése"  onAction="#addElementsToChart" />
          </children>
       </HBox>
    </children>

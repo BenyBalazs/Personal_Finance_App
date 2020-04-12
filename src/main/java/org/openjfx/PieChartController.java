@@ -10,7 +10,12 @@ public class PieChartController {
     @FXML
     PieChart pieChart;
 
+    public void initialize(){
+        addElementsToChart();
+    }
+
     public void addElementsToChart() {
+        pieChart.getData().clear();
         var eDistData = Loader.storage.getDist();
         for (int i = 0; eDistData.size() > i; i++) {
             PieChart.Data tmp = new PieChart.Data(eDistData.get(i).getName(),eDistData.get(i).getPercentage());
