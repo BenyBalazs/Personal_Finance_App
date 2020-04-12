@@ -43,15 +43,15 @@ public class PrimaryController {
     Label Balance;
     @FXML
     Button pieChartOpener;
+    @FXML
+    Label labelOfWarnMessage;
 
     void warnMessage(String s){
-        idSelector.setStyle("-fx-border-color: firebrick ");
-        try {
-            wait(100);
-        }catch (Exception e){logger.error("Oops");}
-        idSelector.setStyle("");
+        if(!labelOfWarnMessage.isVisible()){
+            labelOfWarnMessage.setVisible(true);
+            labelOfWarnMessage.setText(s);
+        }else labelOfWarnMessage.setText(s);
     }
-
 
     @FXML
     public void addElementToList() {
@@ -64,7 +64,6 @@ public class PrimaryController {
             Loader.storage.getExpenses().add(tmp);
             myList.getItems().add(tmp.toString());
             logger.trace("User added a new Expense to the list");
-
         }
         else {
             Income tmp = new Income('I', Loader.storage.getPrimaryKeyForIncomes(),
@@ -76,12 +75,17 @@ public class PrimaryController {
         test.setText("Expenses: " + Loader.storage.getSumOfExpenses() + "Bevételek: " + Loader.storage.getSumOfIncomes() );
         Balance.setText(Loader.storage.getBalance().toString());
         Loader.storage.getDistributionExpenses();
-
+        labelOfWarnMessage.setVisible(false);
 
         } catch (NullPointerException e) {
             logger.error("No id found ", e);
+            warnMessage("A név mező kitöltése kötelező!");
+        } catch (VerifyError e){
+            logger.error("The Date field was null", e);
+            warnMessage("A dátum mező kitöltése kötelező");
         } catch (Exception e){
             logger.error("@Something went wrong {}", e);
+            warnMessage("Valami tönkrement hoppá");
         }
     }
 
@@ -109,8 +113,10 @@ public class PrimaryController {
             Scene scene = new Scene(part);
             stage.setScene(scene);
             stage.setTitle("Megoszlás");
+            stage.setResizable(false);
+            stage.sizeToScene();
             stage.show();
-            logger.trace("User opened the PieChart window");
+            logger.trace("Function called  openPieChartWindow");
         }catch (Exception e) {
             logger.error("Error when trying to PieChartWindow: " ,e);
         }

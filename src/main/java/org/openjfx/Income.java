@@ -24,12 +24,12 @@ class Income {
         DayOfAdd = dateNullChecker(dayOfAdd);
     }
 
-    private LocalDate dateNullChecker(LocalDate dayOfAdd)throws NullPointerException {
+    private LocalDate dateNullChecker(LocalDate dayOfAdd)throws VerifyError {
 
         logger.trace("We are checking if date is null");
         if (dayOfAdd == null) {
             logger.warn("The date field was empty");
-            throw new NullPointerException("No date was found");
+            throw new VerifyError("No date was found");
         }
         else {
             logger.debug("Now returning date with the value of ", dayOfAdd );
