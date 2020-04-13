@@ -4,17 +4,45 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="350.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.EditWindowController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+      <TextFlow prefHeight="30.0" prefWidth="200.0" textAlignment="CENTER">
          <children>
-            <Pane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
-            <Label text="Dummy Text" textAlignment="CENTER">
+            <Label text="Szerkesztés">
                <font>
-                  <Font size="47.0" />
-               </font>
-            </Label>
+                  <Font size="22.0" />
+               </font></Label>
+         </children></TextFlow>
+      <HBox alignment="CENTER">
+         <children>
+            <VBox alignment="BOTTOM_CENTER">
+               <children>
+                  <Label text="Bevételek" />
+                  <ScrollPane prefHeight="200.0" prefWidth="410">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="400.0" />
+                    </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="238.0" prefWidth="40.0" />
+            <VBox alignment="BOTTOM_CENTER">
+               <children>
+                  <Label text="Kiadások" />
+                  <ScrollPane prefHeight="200.0" prefWidth="410">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="400.0" />
+                    </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
          </children>
-      </AnchorPane>
+      </HBox>
+      <Separator prefHeight="30.0" prefWidth="900.0" />
+      <HBox alignment="CENTER">
+         <children>
+            <Button fx:id="listUpdaterButton" mnemonicParsing="false" onAction="#updateList" text="Lista Frissítése" />
+         </children>
+      </HBox>
    </children>
 </VBox>
