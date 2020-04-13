@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.converter.IntegerStringConverter;
 
 import java.nio.Buffer;
 import java.text.SimpleDateFormat;
@@ -94,9 +95,36 @@ public class EditWindowController {
 
             return cell;
         });
-        colExpAmount.setCellFactory(TextFieldTableCell.forTableColumn());
+        colExpAmount.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
         colExpName.setOnEditCommit(e -> e.getTableView().getItems().
+                get(e.getTablePosition().getRow()).setName(e.getNewValue()));
+
+    }
+
+    private void editableIncCols(){
+        colIncName.setCellFactory(TextFieldTableCell.forTableColumn());
+        colIncDate.setCellFactory(column -> {
+            TableCell<Income, LocalDate> cell = new TableCell<Income, LocalDate>() {
+                private SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+
+                @Override
+                protected void updateItem(LocalDate item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if(empty) {
+                        setText(null);
+                    }
+                    else {
+                        setText(format.format(item));
+                    }
+                }
+            };
+
+            return cell;
+        });
+        colIncAmount.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+
+        colIncName.setOnEditCommit(e -> e.getTableView().getItems().
                 get(e.getTablePosition().getRow()).setName(e.getNewValue()));
 
     }

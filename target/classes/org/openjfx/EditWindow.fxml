@@ -1,20 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="350.0" prefWidth="1168.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.EditWindowController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+      <TextFlow prefHeight="30.0" prefWidth="200.0" textAlignment="CENTER">
          <children>
-            <Pane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
-            <Label text="Dummy Text" textAlignment="CENTER">
+            <Label text="Szerkesztés">
                <font>
-                  <Font size="47.0" />
-               </font>
-            </Label>
+                  <Font size="22.0" />
+               </font></Label>
+         </children></TextFlow>
+      <HBox alignment="CENTER">
+         <children>
+            <VBox alignment="BOTTOM_CENTER">
+               <children>
+                  <Label text="Bevételek" />
+                  <TableView prefHeight="200.0" prefWidth="570">
+                    <columns>
+                      <TableColumn fx:id="colIncId" prefWidth="34.0" text="Id" />
+                      <TableColumn fx:id="colIncName" prefWidth="166.0" text="Név" />
+                        <TableColumn fx:id="colIncDate" prefWidth="143.0" text="Hozzáadás Dátuma" />
+                        <TableColumn fx:id="colIncAmount" prefWidth="148.0" text="Összef (Ft)" />
+                        <TableColumn fx:id="colIncEdit" prefWidth="76.0" text="Szerkeszt" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="238.0" prefWidth="40.0" />
+            <VBox alignment="BOTTOM_CENTER">
+               <children>
+                  <Label text="Kiadások" />
+                  <TableView prefHeight="200.0" prefWidth="570">
+                     <columns>
+                        <TableColumn fx:id="colExpId" prefWidth="34.0" text="Id" />
+                        <TableColumn fx:id="colExpName" prefWidth="156.0" text="Név" />
+                        <TableColumn fx:id="colExpDate" prefWidth="142.0" text="Hozzáadás Dátuma" />
+                        <TableColumn fx:id="colExpAmount" prefWidth="152.0" text="Összef (Ft)" />
+                        <TableColumn fx:id="colExpEdit" prefWidth="76.0" text="Szerkeszt" />
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
          </children>
-      </AnchorPane>
+      </HBox>
+      <Separator prefHeight="30.0" prefWidth="900.0" />
+      <HBox alignment="CENTER">
+         <children>
+            <Button fx:id="listUpdaterButton" mnemonicParsing="false" onAction="#updateList" text="Lista Frissítése" />
+         </children>
+      </HBox>
    </children>
 </VBox>
