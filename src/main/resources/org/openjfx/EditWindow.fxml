@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="350.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.EditWindowController">
+<VBox prefHeight="350.0" prefWidth="1168.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.EditWindowController">
    <children>
       <TextFlow prefHeight="30.0" prefWidth="200.0" textAlignment="CENTER">
          <children>
@@ -18,22 +19,30 @@
             <VBox alignment="BOTTOM_CENTER">
                <children>
                   <Label text="Bevételek" />
-                  <ScrollPane prefHeight="200.0" prefWidth="410">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="400.0" />
-                    </content>
-                  </ScrollPane>
+                  <TableView prefHeight="200.0" prefWidth="570">
+                    <columns>
+                      <TableColumn fx:id="colIncId" prefWidth="34.0" text="Id" />
+                      <TableColumn fx:id="colIncName" prefWidth="166.0" text="Név" />
+                        <TableColumn fx:id="colIncDate" prefWidth="143.0" text="Hozzáadás Dátuma" />
+                        <TableColumn fx:id="colIncAmount" prefWidth="148.0" text="Összef (Ft)" />
+                        <TableColumn fx:id="colIncEdit" prefWidth="76.0" text="Szerkeszt" />
+                    </columns>
+                  </TableView >
                </children>
             </VBox>
             <Separator orientation="VERTICAL" prefHeight="238.0" prefWidth="40.0" />
             <VBox alignment="BOTTOM_CENTER">
                <children>
                   <Label text="Kiadások" />
-                  <ScrollPane prefHeight="200.0" prefWidth="410">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="400.0" />
-                    </content>
-                  </ScrollPane>
+                  <TableView prefHeight="200.0" prefWidth="570">
+                     <columns>
+                        <TableColumn fx:id="colExpId" prefWidth="34.0" text="Id" />
+                        <TableColumn fx:id="colExpName" prefWidth="156.0" text="Név" />
+                        <TableColumn fx:id="colExpDate" prefWidth="142.0" text="Hozzáadás Dátuma" />
+                        <TableColumn fx:id="colExpAmount" prefWidth="152.0" text="Összef (Ft)" />
+                        <TableColumn fx:id="colExpEdit" prefWidth="76.0" text="Szerkeszt" />
+                     </columns>
+                  </TableView>
                </children>
             </VBox>
          </children>

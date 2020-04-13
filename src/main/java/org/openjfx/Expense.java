@@ -1,5 +1,6 @@
 package org.openjfx;
 
+import javafx.scene.control.Button;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +14,8 @@ import java.util.Calendar;
    private String Name;
    private Integer Amount;
    private LocalDate DayOfAdd;
+
+   Button update;
 
    private static Logger logger = LoggerFactory.getLogger("Expense.class");
 
