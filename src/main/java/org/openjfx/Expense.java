@@ -40,16 +40,15 @@ import java.util.Calendar;
             }
    }
 
-
-    public String getName() {
-        return Name;
-    }
-
     public void setName(String name) {
         Name = name;
     }
 
-    public Integer getPrimaryKey() {
+     public String getName() {
+         return Name;
+     }
+
+     public Integer getPrimaryKey() {
         return PrimaryKey;
     }
 
@@ -73,7 +72,11 @@ import java.util.Calendar;
         DayOfAdd = dayOfAdd;
     }
 
-    @Override
+     public Character getType() {
+         return Type;
+     }
+
+     @Override
     public String toString() {
         return "Expense{" +
                 "PrimaryKey=" + PrimaryKey +

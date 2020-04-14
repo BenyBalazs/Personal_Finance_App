@@ -71,6 +71,14 @@ class Income {
     public void setTime(LocalDate dayOfAdd) {
         DayOfAdd = dayOfAdd;
     }
+    
+    public Button getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(Button update) {
+        this.update = update;
+    }
 
     @Override
     public String toString() {

@@ -1,18 +1,24 @@
 package org.openjfx;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.openjfx.Expense;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.Buffer;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
-public class EditWindowController {
+public class EditWindowController  {
 
+    private static Logger logger = LoggerFactory.getLogger("EditWindowController.class");
 
     @FXML
     private TableView<Expense> expTableInfo;
@@ -20,7 +26,7 @@ public class EditWindowController {
     @FXML
     private TableView<Income> incTableInfo;
     @FXML
-    private TableColumn<Income, Character> colIncId;
+    private TableColumn<Income, Integer> colIncId;
 
     @FXML
     private TableColumn<Income, Integer> colIncAmount;
@@ -47,31 +53,35 @@ public class EditWindowController {
     private TableColumn<Income, LocalDate> colIncDate;
 
     @FXML
-    private TableColumn<Expense, Character> colExpId;
+    private TableColumn<Expense, Integer> colExpId;
+    @FXML
+    private TableColumn<Income,Character> iType;
+    @FXML
+    private TableColumn<Expense,Character> eType;
 
     @FXML
     Button listUpdaterButton;
 
     public void initialize(){
-        updateList();
+        updateExpList();
+        initExpColumns();
     }
 
     private void initExpColumns(){
-        colExpId.setCellValueFactory(new PropertyValueFactory<Expense,Character>("Id"));
-        colExpName.setCellValueFactory(new PropertyValueFactory<Expense,String>("Név"));
-        colExpDate.setCellValueFactory(new PropertyValueFactory<Expense,LocalDate>("Dátum"));
-        colExpAmount.setCellValueFactory(new PropertyValueFactory<Expense,Integer>("Összeg"));
-        colExpEdit.setCellValueFactory(new PropertyValueFactory<>("Szerkeszt"));
-
-        editableExpCols();
+        eType.setCellValueFactory(new PropertyValueFactory<Expense,Character>("Type"));
+        colExpId.setCellValueFactory(new PropertyValueFactory<Expense,Integer>("PrimaryKey"));
+        colExpName.setCellValueFactory(new PropertyValueFactory<Expense,String>("Name"));
+        colExpDate.setCellValueFactory(new PropertyValueFactory<Expense,LocalDate>("Amount"));
+        colExpAmount.setCellValueFactory(new PropertyValueFactory<Expense,Integer>("DayOfAdd"));
+       // colExpEdit.setCellValueFactory(new PropertyValueFactory<>("Szerkeszt"));
     }
 
     private void initIncColumns(){
-        colIncId.setCellValueFactory(new PropertyValueFactory<Income,Character>("Id"));
-        colIncName.setCellValueFactory(new PropertyValueFactory<Income,String >("Név"));
-        colIncDate.setCellValueFactory(new PropertyValueFactory<Income,LocalDate>("Dátum"));
-        colIncAmount.setCellValueFactory(new PropertyValueFactory<Income,Integer>("Összeg"));
-        colIncEdit.setCellValueFactory(new PropertyValueFactory<>("Update"));
+        colIncId.setCellValueFactory(new PropertyValueFactory<Income,Integer>("PrimaryKey"));
+        colIncName.setCellValueFactory(new PropertyValueFactory<Income,String >("Name"));
+        colIncDate.setCellValueFactory(new PropertyValueFactory<Income,LocalDate>("Amount"));
+        colIncAmount.setCellValueFactory(new PropertyValueFactory<Income,Integer>("DayOfAdd"));
+        //colIncEdit.setCellValueFactory(new PropertyValueFactory<>("Update"));
     }
 
 
@@ -79,7 +89,7 @@ public class EditWindowController {
         colExpName.setCellFactory(TextFieldTableCell.forTableColumn());
         colExpDate.setCellFactory(column -> {
             TableCell<Expense, LocalDate> cell = new TableCell<Expense, LocalDate>() {
-                private SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+                private SimpleDateFormat format = new SimpleDateFormat("YYYY.MM.DD");
 
                 @Override
                 protected void updateItem(LocalDate item, boolean empty) {
@@ -106,7 +116,7 @@ public class EditWindowController {
         colIncName.setCellFactory(TextFieldTableCell.forTableColumn());
         colIncDate.setCellFactory(column -> {
             TableCell<Income, LocalDate> cell = new TableCell<Income, LocalDate>() {
-                private SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+                private SimpleDateFormat format = new SimpleDateFormat("YYYY.MM.DD");
 
                 @Override
                 protected void updateItem(LocalDate item, boolean empty) {
@@ -124,12 +134,24 @@ public class EditWindowController {
         });
         colIncAmount.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
-        colIncName.setOnEditCommit(e -> e.getTableView().getItems().
-                get(e.getTablePosition().getRow()).setName(e.getNewValue()));
-
     }
+
+    void updateExpList(){
+        ObservableList<Expense> expTableData = FXCollections.observableArrayList(Loader.storage.getExpenses());
+
+        try{
+
+            for(int i = 0; i < Loader.storage.getExpenses().size(); i++) {
+
+                expTableInfo.setItems(expTableData);
+                logger.trace("New element was added to the Exp list");
+
+            }
+        }catch (Exception e){logger.error("Unknown error: ", e);}
+    }
+
     @FXML
     void updateList(){
-
+        updateExpList();
     }
 }

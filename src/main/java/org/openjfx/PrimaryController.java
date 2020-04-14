@@ -34,23 +34,37 @@ public class PrimaryController {
     @FXML
     Button addButton;
     @FXML
-    Label test;
+    Label expensesSumLabel;
     @FXML
     ListView myList;
     @FXML
     Button editButton;
     @FXML
-    Label Balance;
+    Label balanceLabel;
     @FXML
     Button pieChartOpener;
     @FXML
     Label labelOfWarnMessage;
+    @FXML
+    Label incomesSumLabel;
+
+
+    public void initialize(){
+
+        update();
+    }
+    private void update (){
+
+        incomesSumLabel.setText(Loader.storage.getSumOfIncomes().toString());
+        expensesSumLabel.setText(Loader.storage.getSumOfExpenses().toString());
+        balanceLabel.setText(Loader.storage.getBalance().toString());
+    }
 
     void warnMessage(String s){
         if(!labelOfWarnMessage.isVisible()){
             labelOfWarnMessage.setVisible(true);
-            labelOfWarnMessage.setText(s);
-        }else labelOfWarnMessage.setText(s);
+        }
+        labelOfWarnMessage.setText(s);
     }
 
     @FXML
@@ -60,21 +74,24 @@ public class PrimaryController {
 
         if (expenseOrIncome.getValue().toString().equals("Kiadás")){
             Expense tmp = new Expense('E',Loader.storage.getPrimaryKeyForExpenses(),
-                    idSelector.getValue().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue());
+                    idSelector.getValue().toString(),
+                    (Integer) moneySpinner.getValue(), dateDatePicker.getValue());
             Loader.storage.getExpenses().add(tmp);
-            myList.getItems().add(tmp.toString());
+            myList.getItems().add(Loader.storage.getExpenses().
+                    get(Loader.storage.getExpenses().size() - 1).toString());
             logger.trace("User added a new Expense to the list");
         }
         else {
             Income tmp = new Income('I', Loader.storage.getPrimaryKeyForIncomes(),
-                    idSelector.getValue().toString(),(Integer) moneySpinner.getValue(),dateDatePicker.getValue());
+                    idSelector.getValue().toString(),
+                    (Integer) moneySpinner.getValue(),dateDatePicker.getValue());
             Loader.storage.getIncomes().add(tmp);
-            myList.getItems().add(tmp.toString());
+            myList.getItems().add(Loader.storage.getIncomes().
+                    get(Loader.storage.getIncomes().size() - 1).toString());
             logger.trace("user added a new Income to the list");
         }
-        test.setText("Expenses: " + Loader.storage.getSumOfExpenses() + "Bevételek: " + Loader.storage.getSumOfIncomes() );
-        Balance.setText(Loader.storage.getBalance().toString());
-        Loader.storage.getDistributionExpenses();
+        update();
+        Loader.storage.calculateDistributionExpenses();
         labelOfWarnMessage.setVisible(false);
 
         } catch (NullPointerException e) {

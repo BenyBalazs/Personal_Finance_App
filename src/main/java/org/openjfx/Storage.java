@@ -23,7 +23,7 @@ class Storage {
 
     }
 
-    public void getDistributionExpenses(){
+    public void calculateDistributionExpenses(){
 
         String[] myArray =  Expenses.stream()
                 .map(Expense::getName).distinct().toArray(String[]::new);
