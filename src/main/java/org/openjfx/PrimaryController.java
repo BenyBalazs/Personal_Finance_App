@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 import org.slf4j.Logger;
@@ -55,9 +56,15 @@ public class PrimaryController {
     }
     private void update (){
 
-        incomesSumLabel.setText(Loader.storage.getSumOfIncomes().toString());
-        expensesSumLabel.setText(Loader.storage.getSumOfExpenses().toString());
-        balanceLabel.setText(Loader.storage.getBalance().toString());
+        incomesSumLabel.setText(Loader.storage.getSumOfIncomes().toString() + " Ft");
+        expensesSumLabel.setText(Loader.storage.getSumOfExpenses().toString() + " Ft");
+
+        if(Loader.storage.getBalance()>0)
+            balanceLabel.setTextFill(Paint.valueOf("#12c548"));
+        else
+            balanceLabel.setTextFill(Paint.valueOf("#dc143c"));
+        balanceLabel.setText(Loader.storage.getBalance().toString() + " Ft");
+
     }
 
     void warnMessage(String s){
