@@ -2,6 +2,7 @@ package org.openjfx;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.converter.LocalDateStringConverter;
@@ -69,7 +70,6 @@ public class EditWindowController  {
         colExpName.setCellValueFactory(new PropertyValueFactory<Expense,String>("Name"));
         colExpDate.setCellValueFactory(new PropertyValueFactory<Expense,LocalDate>("DayOfAdd"));
         colExpAmount.setCellValueFactory(new PropertyValueFactory<Expense,Integer>("Amount"));
-       // colExpEdit.setCellValueFactory(new PropertyValueFactory<>("Szerkeszt"));
 
         editableExpCols();
     }
@@ -79,7 +79,6 @@ public class EditWindowController  {
         colIncName.setCellValueFactory(new PropertyValueFactory<Income,String>("Name"));
         colIncDate.setCellValueFactory(new PropertyValueFactory<Income,LocalDate>("DayOfAdd"));
         colIncAmount.setCellValueFactory(new PropertyValueFactory<Income,Integer>("Amount"));
-        //colIncEdit.setCellValueFactory(new PropertyValueFactory<>("Update"));
 
         editableIncCols();
     }
@@ -87,20 +86,69 @@ public class EditWindowController  {
 
     private void editableExpCols(){
         colExpName.setCellFactory(TextFieldTableCell.forTableColumn());
+        colExpName.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Expense, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Expense, String> expStringCellEditEvent) {
+                expStringCellEditEvent.getTableView().getItems().
+                        get(expStringCellEditEvent.getTablePosition().getRow()).
+                        setName(expStringCellEditEvent.getNewValue());
+            }
+        });
+
         colExpDate.setCellFactory(TextFieldTableCell.forTableColumn(new LocalDateStringConverter()));
+        colExpDate.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Expense, LocalDate>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Expense, LocalDate> expLocalDateCellEditEvent) {
+                expLocalDateCellEditEvent.getTableView().getItems().
+                        get(expLocalDateCellEditEvent.getTablePosition().getRow()).
+                        setDayOfAdd(expLocalDateCellEditEvent.getNewValue());
+            }
+        });
+
         colExpAmount.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        colExpAmount.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Expense, Integer>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Expense, Integer> expIntegerCellEditEvent) {
+                expIntegerCellEditEvent.getTableView().getItems().
+                        get(expIntegerCellEditEvent.getTablePosition().getRow()).
+                        setAmount(expIntegerCellEditEvent.getNewValue());
+            }
+        });
 
         expTableInfo.setEditable(true);
-
-        /*colExpName.setOnEditCommit(e -> e.getTableView().getItems().
-                get(e.getTablePosition().getRow()).setName(e.getNewValue()));*/
 
     }
 
     private void editableIncCols(){
         colIncName.setCellFactory(TextFieldTableCell.forTableColumn());
+        colIncName.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Income, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Income, String> incStringCellEditEvent) {
+                incStringCellEditEvent.getTableView().getItems().
+                        get(incStringCellEditEvent.getTablePosition().getRow()).
+                        setName(incStringCellEditEvent.getNewValue());
+            }
+        });
+
         colIncDate.setCellFactory(TextFieldTableCell.forTableColumn(new LocalDateStringConverter()));
+        colIncDate.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Income, LocalDate>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Income, LocalDate> incLocalDateCellEditEvent) {
+                    incLocalDateCellEditEvent.getTableView().getItems().
+                            get(incLocalDateCellEditEvent.getTablePosition().getRow()).
+                            setDayOfAdd(incLocalDateCellEditEvent.getNewValue());
+            }
+        });
+
         colIncAmount.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        colIncAmount.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Income, Integer>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Income, Integer> incStringCellEditEvent) {
+                incStringCellEditEvent.getTableView().getItems().
+                        get(incStringCellEditEvent.getTablePosition().getRow()).
+                        setAmount(incStringCellEditEvent.getNewValue());
+            }
+        });
 
         incTableInfo.setEditable(true);
     }
