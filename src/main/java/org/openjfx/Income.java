@@ -7,13 +7,13 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDate;
 import java.util.Calendar;
 
-class Income {
+public class Income {
 
     private Character Type;
     private Integer PrimaryKey;
     private String Name;
+    LocalDate DayOfAdd;
     private Integer Amount;
-    private LocalDate DayOfAdd;
 
     Button update;
 
@@ -64,21 +64,14 @@ class Income {
         Amount = amount;
     }
 
-    public LocalDate getTime() {
+    public LocalDate getDayOfAdd() {
         return DayOfAdd;
     }
 
-    public void setTime(LocalDate dayOfAdd) {
+    public void setDayOfAdd(LocalDate dayOfAdd) {
         DayOfAdd = dayOfAdd;
     }
-    
-    public Button getUpdate() {
-        return update;
-    }
 
-    public void setUpdate(Button update) {
-        this.update = update;
-    }
 
     @Override
     public String toString() {

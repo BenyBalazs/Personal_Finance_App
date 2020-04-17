@@ -2,7 +2,7 @@ package org.openjfx;
 
 import javafx.scene.control.DatePicker;
 
- class Distribution {
+ public class Distribution {
 
     private String Name;
     private Integer Amount;

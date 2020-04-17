@@ -21,7 +21,8 @@
                   <Label text="Bevételek" />
                   <TableView fx:id="incTableInfo" prefHeight="200.0" prefWidth="640.0">
                     <columns>
-                        <TableColumn  fx:id="IT" minWidth="0.0" prefWidth="0.0" text="Type" />
+                        <TableColumn  fx:id="IT" minWidth="0.0" prefWidth="0.0" text="Type" ></TableColumn>
+
                       <TableColumn fx:id="colIncId" prefWidth="36.0" text="Id" />
                       <TableColumn fx:id="colIncName" prefWidth="152.0" text="Név" />
                         <TableColumn fx:id="colIncDate" prefWidth="166.0" text="Hozzáadás Dátuma" />
@@ -52,7 +53,7 @@
       <Separator prefHeight="30.0" prefWidth="900.0" />
       <HBox alignment="CENTER">
          <children>
-            <Button fx:id="listUpdaterButton" mnemonicParsing="false" onAction="#updateList" text="Lista Frissítése" />
+            <Button fx:id="listUpdaterButton" mnemonicParsing="false" onAction="#updateLists" text="Lista Frissítése" />
          </children>
       </HBox>
    </children>

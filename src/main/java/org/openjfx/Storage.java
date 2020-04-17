@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-class Storage {
+public class Storage<T> {
 
     private static Logger logger = LoggerFactory.getLogger("Storage.class");
 

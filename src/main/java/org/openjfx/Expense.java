@@ -7,13 +7,14 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDate;
 import java.util.Calendar;
 
- class Expense{
+ public class Expense{
 
    private Character Type;
    private Integer PrimaryKey;
    private String Name;
-   private Integer Amount;
    private LocalDate DayOfAdd;
+   private Integer Amount;
+
 
    Button update;
 
@@ -40,40 +41,36 @@ import java.util.Calendar;
             }
    }
 
-    public void setName(String name) {
-        Name = name;
-    }
+     public Integer getPrimaryKey() {
+         return PrimaryKey;
+     }
+
+     public void setPrimaryKey(Integer primaryKey) {
+         PrimaryKey = primaryKey;
+     }
 
      public String getName() {
          return Name;
      }
 
-     public Integer getPrimaryKey() {
-        return PrimaryKey;
-    }
+     public void setName(String name) {
+         Name = name;
+     }
 
-    public void setPrimaryKey(Integer primaryKey) {
-        PrimaryKey = primaryKey;
-    }
+     public LocalDate getDayOfAdd() {
+         return DayOfAdd;
+     }
 
-    public Integer getAmount() {
-        return Amount;
-    }
+     public void setDayOfAdd(LocalDate dayOfAdd) {
+         DayOfAdd = dayOfAdd;
+     }
 
-    public void setAmount(Integer amount) {
-        Amount = amount;
-    }
+     public Integer getAmount() {
+         return Amount;
+     }
 
-    public LocalDate getDayOfAdd() {
-        return DayOfAdd;
-    }
-
-    public void setDayOfAdd(LocalDate dayOfAdd) {
-        DayOfAdd = dayOfAdd;
-    }
-
-     public Character getType() {
-         return Type;
+     public void setAmount(Integer amount) {
+         Amount = amount;
      }
 
      @Override
