@@ -61,8 +61,6 @@ public class EditWindowController  {
     Button listUpdaterButton;
 
     public void initialize(){
-        Loader.dBconnection.loadExpDataToStorage();
-        Loader.dBconnection.loadIncDataToStorage();
         updateLists();
     }
 

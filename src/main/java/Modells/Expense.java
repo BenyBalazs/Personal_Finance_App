@@ -1,26 +1,32 @@
 package Modells;
 
 import javafx.scene.control.Button;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Entity;
+import org.hibernate.annotations.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import javax.persistence.*;
 import java.time.LocalDate;
 
+
+@DynamicUpdate
 public class Expense{
 
-   private Character Type;
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "PrimaryKey")
    private Integer PrimaryKey;
+   @Column(name="Name")
    private String Name;
+   @Column(name = "DayOfAdd")
    private LocalDate DayOfAdd;
+   @Column(name = "Amount")
    private Integer Amount;
-
-
-   Button update;
 
    private static Logger logger = LoggerFactory.getLogger("Expense.class");
 
-   public Expense(Character type, Integer primaryKey, String name, Integer amount, LocalDate dayOfAdd) {
-        Type = type;
+   public Expense(Integer primaryKey, String name, Integer amount, LocalDate dayOfAdd) {
         PrimaryKey = primaryKey;
         Name = name;
         Amount = amount;

@@ -1,25 +1,35 @@
 package Modells;
 
 import javafx.scene.control.Button;
+import org.hibernate.annotations.DynamicUpdate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
+@DynamicUpdate
 public class Income {
 
-    private Character Type;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PrimaryKey")
     private Integer PrimaryKey;
+    @Column(name="Name")
     private String Name;
-    LocalDate DayOfAdd;
+    @Column(name = "DayOfAdd")
+    private LocalDate DayOfAdd;
+    @Column(name = "Amount")
     private Integer Amount;
 
     Button update;
 
     private static Logger logger = LoggerFactory.getLogger("Expense.class");
 
-    public Income(Character type, Integer primaryKey, String name, Integer amount, LocalDate dayOfAdd) {
-        Type = type;
+    public Income( Integer primaryKey, String name, Integer amount, LocalDate dayOfAdd) {
         PrimaryKey = primaryKey;
         Name = name;
         Amount = amount;

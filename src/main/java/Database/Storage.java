@@ -3,6 +3,7 @@ package Database;
 import Modells.Distribution;
 import Modells.Expense;
 import Modells.Income;
+import org.hibernate.annotations.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

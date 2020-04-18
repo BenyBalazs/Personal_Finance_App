@@ -8,25 +8,47 @@ import org.jdbi.v3.core.Jdbi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.security.spec.ECField;
+import java.sql.Connection;
+
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class DBConnection {
 
     private static Logger logger = LoggerFactory.getLogger("DBConnection.class");
-    logger.debug("Connecting to the database");
-    public Jdbi jdbi =
-            Jdbi.create(
-                    "jdbc:mysql://remotemysql.com:3306/knhXklwrVj",
-                    "knhXklwrVj",
-                    "x0aMlAWFVd");
+
+    Connection connection = null;
+
+    public void connect(){
+        logger.debug("Trying to connect to database");
+        if(!connection.equals(null)) {
+            try {
+                connection =
+                        DriverManager.getConnection(
+                                "jdbc:mysql://remotemysql.com:3306/knhXklwrVj" +
+                                        "user=knhXklwrVj&password=x0aMlAWFVd");
+
+            } catch (Exception e) {
+                logger.error("Database error", e);
+            }
+        }
+    }
+
+    public DBConnection() {
+
+    }
 
     public void loadExpDataToStorage(){
-        String query = "SELECT * FROM `Expenses`";
+        connect();
+        try {
+            String query = "SELECT * FROM `Expenses`";
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
 
-        try (Handle handle = jdbi.open()){
-            Loader.storage.setExpenses((ArrayList<Expense>) handle.createQuery(query).mapTo(Expense.class).list());
-
-        }
+        }catch (Exception e){}
     }
 
     public void loadIncDataToStorage(){

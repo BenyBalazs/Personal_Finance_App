@@ -45,12 +45,7 @@ public class PrimaryController {
 
 
     public void initialize(){
-        try {
-            Loader.dBconnection.loadIncDataToStorage();
-            Loader.dBconnection.loadExpDataToStorage();
-        }catch (Exception e){
-            logger.error("Something Wrong WIth the DBConnection", e);
-        }
+
         update();
     }
     private void update (){
@@ -79,7 +74,7 @@ public class PrimaryController {
         try{
 
         if (expenseOrIncome.getValue().toString().equals("Kiadás")){
-            Expense tmp = new Expense('E',Loader.storage.getPrimaryKeyForExpenses(),
+            Expense tmp = new Expense(Loader.storage.getPrimaryKeyForExpenses(),
                     idSelector.getValue().toString(),
                     (Integer) moneySpinner.getValue(), dateDatePicker.getValue());
             Loader.storage.getExpenses().add(tmp);
@@ -88,7 +83,7 @@ public class PrimaryController {
             logger.trace("User added a new Expense to the list");
         }
         else {
-            Income tmp = new Income('I', Loader.storage.getPrimaryKeyForIncomes(),
+            Income tmp = new Income(Loader.storage.getPrimaryKeyForIncomes(),
                     idSelector.getValue().toString(),
                     (Integer) moneySpinner.getValue(),dateDatePicker.getValue());
             Loader.storage.getIncomes().add(tmp);
