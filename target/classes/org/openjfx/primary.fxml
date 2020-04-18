@@ -72,16 +72,16 @@
                <children>
                   <VBox alignment="CENTER" style="-fx-padding: 10">
                      <children>
-                        <AnchorPane prefHeight="213.0" prefWidth="556.0">
+                        <AnchorPane prefHeight="188.0" prefWidth="450.0">
                            <children>
-                              <ListView fx:id="myList" prefHeight="220.0" prefWidth="460.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
+                              <ListView fx:id="myList" prefHeight="196.0" prefWidth="512.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
                            </children>
                         </AnchorPane>
                         <Separator prefHeight="22.0" prefWidth="434.0" />
                         <Button fx:id="editButton" mnemonicParsing="false" onAction="#openEditWindow" text="Szerkesztés" textAlignment="CENTER" />
                      </children>
                   </VBox>
-                  <VBox>
+                  <VBox prefHeight="247.0" prefWidth="334.0">
                      <children>
                         <Label fx:id="incomesSumLabel" prefHeight="22.0" prefWidth="240.0">
                            <graphic>
@@ -100,7 +100,7 @@
                               <Label text="Egyenleg: " />
                            </graphic>
                         </Label>
-                        <Separator prefHeight="142.0" prefWidth="240.0" />
+                        <Separator prefHeight="142.0" prefWidth="346.0" />
                         <VBox alignment="CENTER">
                            <children>
                               <Button fx:id="pieChartOpener" mnemonicParsing="false" onAction="#openPieChartWindow" text="Kördiagramm Megnyitása" />

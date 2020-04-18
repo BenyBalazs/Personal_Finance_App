@@ -1,9 +1,9 @@
 package org.openjfx;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
+import Database.Loader;
+import Modells.Distribution;
 
 import java.util.ArrayList;
 

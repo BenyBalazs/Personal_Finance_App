@@ -1,23 +1,17 @@
 package org.openjfx;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Calendar;
-
 import javafx.scene.paint.Paint;
-import javafx.stage.Modality;
-import javafx.stage.StageStyle;
-import org.slf4j.Logger;
+import org.openjfx.App;
+import Database.Loader;
+import Modells.Expense;
+import Modells.Income;
 import org.slf4j.Logger;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.skin.DatePickerSkin;
 import javafx.stage.Stage;
 import org.slf4j.LoggerFactory;
 

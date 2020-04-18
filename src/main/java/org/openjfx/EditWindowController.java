@@ -6,16 +6,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.converter.LocalDateStringConverter;
-import org.openjfx.Expense;
-import javafx.scene.control.cell.ComboBoxTableCell;
+import Database.Loader;
+import Modells.Expense;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
+import Modells.Income;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.Buffer;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 public class EditWindowController  {

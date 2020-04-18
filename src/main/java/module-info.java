@@ -4,5 +4,7 @@ module org.openjfx {
     requires org.slf4j;
 
     opens org.openjfx to javafx.fxml;
+    opens Modells to javafx.base;
+    opens Database to javafx.base;
     exports org.openjfx;
 }
