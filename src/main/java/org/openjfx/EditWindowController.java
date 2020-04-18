@@ -1,5 +1,6 @@
 package org.openjfx;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -39,10 +40,10 @@ public class EditWindowController  {
     private TableColumn<Expense, Integer> colExpAmount;
 
     @FXML
-    private TableColumn<Expense, Button> colExpEdit;
+    private TableColumn<Button, Button> colExpDelete;
 
     @FXML
-    private TableColumn<Income, Button> colIncEdit;
+    private TableColumn<Income, Button> colIncDelete;
 
     @FXML
     private TableColumn<Income, String> colIncName;
@@ -60,6 +61,8 @@ public class EditWindowController  {
     Button listUpdaterButton;
 
     public void initialize(){
+        Loader.dBconnection.loadExpDataToStorage();
+        Loader.dBconnection.loadIncDataToStorage();
         updateLists();
     }
 

@@ -1,19 +1,19 @@
 package org.openjfx;
 
-import javafx.scene.paint.Paint;
-import org.openjfx.App;
 import Database.Loader;
 import Modells.Expense;
 import Modells.Income;
-import org.slf4j.Logger;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+
 
 public class PrimaryController {
 
@@ -45,7 +45,12 @@ public class PrimaryController {
 
 
     public void initialize(){
-
+        try {
+            Loader.dBconnection.loadIncDataToStorage();
+            Loader.dBconnection.loadExpDataToStorage();
+        }catch (Exception e){
+            logger.error("Something Wrong WIth the DBConnection", e);
+        }
         update();
     }
     private void update (){

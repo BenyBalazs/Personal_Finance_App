@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="350.0" prefWidth="1272.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.EditWindowController">
+<VBox prefHeight="350.0" prefWidth="1338.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.EditWindowController">
    <children>
       <TextFlow prefHeight="30.0" prefWidth="200.0" textAlignment="CENTER">
          <children>
@@ -21,13 +21,11 @@
                   <Label text="Bevételek" />
                   <TableView fx:id="incTableInfo" prefHeight="200.0" prefWidth="640.0">
                     <columns>
-                        <TableColumn  fx:id="IT" minWidth="0.0" prefWidth="0.0" text="Type" ></TableColumn>
-
                       <TableColumn fx:id="colIncId" prefWidth="36.0" text="Id" />
                       <TableColumn fx:id="colIncName" prefWidth="152.0" text="Név" />
                         <TableColumn fx:id="colIncDate" prefWidth="166.0" text="Hozzáadás Dátuma" />
-                        <TableColumn fx:id="colIncAmount" prefWidth="175.0" text="Összef (Ft)" />
-                        <TableColumn fx:id="colIncEdit" prefWidth="113.0" text="Szerkeszt" />
+                        <TableColumn fx:id="colIncAmount" prefWidth="213.0" text="Összeg (Ft)" />
+                        <TableColumn fx:id="colIncDelete" prefWidth="72.0" text="Töröl" />
                     </columns>
                   </TableView>
                </children>
@@ -38,12 +36,11 @@
                   <Label text="Kiadások" />
                   <TableView fx:id="expTableInfo" prefHeight="200.0" prefWidth="640">
                      <columns>
-                        <TableColumn fx:id="ET" minWidth="0.0" prefWidth="0.0" text="Type" ></TableColumn>
                         <TableColumn fx:id="colExpId" prefWidth="36.0" text="Id" />
                         <TableColumn fx:id="colExpName" prefWidth="152.0" text="Név" />
                         <TableColumn fx:id="colExpDate" prefWidth="166.0" text="Hozzáadás Dátuma" />
-                        <TableColumn fx:id="colExpAmount" prefWidth="175.0" text="Összef (Ft)" />
-                        <TableColumn fx:id="colExpEdit" prefWidth="113.0" text="Szerkeszt" />
+                        <TableColumn fx:id="colExpAmount" prefWidth="213.0" text="Összeg (Ft)" />
+                        <TableColumn fx:id="colExpDelete" prefWidth="72.0" text="Töröl" />
                      </columns>
                   </TableView>
                </children>

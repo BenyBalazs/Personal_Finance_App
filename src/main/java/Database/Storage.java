@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Storage<T> {
+public class Storage {
 
     private static Logger logger = LoggerFactory.getLogger("Storage.class");
 
@@ -21,9 +21,7 @@ public class Storage<T> {
 
     Integer Balance(){ return getTheSumOfIncomes() - getTheSumOfExpenses();}
 
-    public Storage() {
-
-    }
+    public Storage() { }
 
     public void calculateDistributionExpenses(){
 
@@ -35,8 +33,8 @@ public class Storage<T> {
            for (int j = 0; j < myArray.length; j++) {
                try {
                    if (myArray[j].equals(eDist.get(i).getName())) {
-                       eDist.get(i).setAmount(mapValueLoader(myArray[i]));
-                       double tmp1 = mapValueLoader(myArray[i]);
+                       eDist.get(i).setAmount(valueLoader(myArray[i]));
+                       double tmp1 = valueLoader(myArray[i]);
                        double tmp2 = getTheSumOfExpenses();
                        eDist.get(i).setPercentage( tmp1/tmp2*100 );
                    }
@@ -60,12 +58,12 @@ public class Storage<T> {
         return tmp;
     }
 
-    private Integer mapValueLoader (String name){
+    private Integer valueLoader (String name){
 
        Integer[] sumArray = Expenses.stream()
                .filter(Expense -> Expense.getName() == name)
                .map(Expense::getAmount).toArray(Integer[]::new);
-       logger.debug("Integers in sumArry" + sumArray );
+       logger.debug("Integers in sumArray" + sumArray );
        Integer sum = Arrays.stream(sumArray).reduce(0, (a, b) -> a + b);
        return sum;
     }
@@ -86,6 +84,10 @@ public class Storage<T> {
             tmp += Incomes.get(i).getAmount();
         }
         return tmp;
+    }
+
+    public void deleteElementFormExpenseList(int primaryKey){
+        for (int i = 0; i < Expenses.size(); i++){}
     }
 
     public Integer getPrimaryKeyForExpenses() {
@@ -118,5 +120,13 @@ public class Storage<T> {
 
     public ArrayList<Distribution> getDist() {
         return eDist;
+    }
+
+    public void setExpenses(ArrayList<Expense> expenses) {
+        Expenses = expenses;
+    }
+
+    public void setIncomes(ArrayList<Income> incomes) {
+        Incomes = incomes;
     }
 }
