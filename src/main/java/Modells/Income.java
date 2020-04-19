@@ -1,17 +1,19 @@
 package Modells;
 
 import javafx.scene.control.Button;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
-@DynamicUpdate
+@Data
+@Entity
+@Table(name = "Incomes")
+@NoArgsConstructor
 public class Income {
 
     @Id
@@ -25,12 +27,11 @@ public class Income {
     @Column(name = "Amount")
     private Integer Amount;
 
-    Button update;
-
     private static Logger logger = LoggerFactory.getLogger("Expense.class");
 
-    public Income( Integer primaryKey, String name, Integer amount, LocalDate dayOfAdd) {
-        PrimaryKey = primaryKey;
+    public Income (){}
+
+    public Income(String name, Integer amount, LocalDate dayOfAdd) {
         Name = name;
         Amount = amount;
         DayOfAdd = dateNullChecker(dayOfAdd);
@@ -78,7 +79,7 @@ public class Income {
     }
 
     public void setDayOfAdd(LocalDate dayOfAdd) {
-        DayOfAdd = dayOfAdd;
+        DayOfAdd = dateNullChecker(dayOfAdd);
     }
 
 

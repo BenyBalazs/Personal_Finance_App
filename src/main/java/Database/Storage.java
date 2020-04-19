@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Storage {
 
@@ -123,8 +124,8 @@ public class Storage {
         return eDist;
     }
 
-    public void setExpenses(ArrayList<Expense> expenses) {
-        Expenses = expenses;
+    public void setExpenses(List<Expense> expenses) {
+        Expenses = (ArrayList<Expense>) expenses;
     }
 
     public void setIncomes(ArrayList<Income> incomes) {

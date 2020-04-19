@@ -1,20 +1,20 @@
 package Modells;
 
 import javafx.scene.control.Button;
+import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.Entity;
-import org.hibernate.annotations.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-
-@DynamicUpdate
+@Data
+@Entity
+@Table(name = "Expenses")
 public class Expense{
 
    @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @GeneratedValue
    @Column(name = "PrimaryKey")
    private Integer PrimaryKey;
    @Column(name="Name")
@@ -26,8 +26,8 @@ public class Expense{
 
    private static Logger logger = LoggerFactory.getLogger("Expense.class");
 
-   public Expense(Integer primaryKey, String name, Integer amount, LocalDate dayOfAdd) {
-        PrimaryKey = primaryKey;
+   public Expense(){}
+   public Expense(String name, Integer amount, LocalDate dayOfAdd) {
         Name = name;
         Amount = amount;
         DayOfAdd = dateNullChecker(dayOfAdd);
@@ -67,7 +67,7 @@ public class Expense{
      }
 
      public void setDayOfAdd(LocalDate dayOfAdd) {
-         DayOfAdd = dayOfAdd;
+         DayOfAdd = dateNullChecker(dayOfAdd);
      }
 
      public Integer getAmount() {

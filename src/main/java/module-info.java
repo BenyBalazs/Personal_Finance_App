@@ -8,6 +8,8 @@ module org.openjfx {
     requires org.hibernate.commons.annotations;
     requires org.hibernate.orm.core;
     requires java.persistence;
+    requires java.naming;
+    requires lombok;
 
     opens org.openjfx to javafx.fxml;
     opens Modells to javafx.base;

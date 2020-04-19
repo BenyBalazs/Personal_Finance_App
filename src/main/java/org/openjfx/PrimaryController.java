@@ -45,7 +45,7 @@ public class PrimaryController {
 
 
     public void initialize(){
-
+        Loader.updateExpList();
         update();
     }
     private void update (){
@@ -74,8 +74,7 @@ public class PrimaryController {
         try{
 
         if (expenseOrIncome.getValue().toString().equals("Kiadás")){
-            Expense tmp = new Expense(Loader.storage.getPrimaryKeyForExpenses(),
-                    idSelector.getValue().toString(),
+            Expense tmp = new Expense(idSelector.getValue().toString(),
                     (Integer) moneySpinner.getValue(), dateDatePicker.getValue());
             Loader.storage.getExpenses().add(tmp);
             myList.getItems().add(Loader.storage.getExpenses().
@@ -83,8 +82,7 @@ public class PrimaryController {
             logger.trace("User added a new Expense to the list");
         }
         else {
-            Income tmp = new Income(Loader.storage.getPrimaryKeyForIncomes(),
-                    idSelector.getValue().toString(),
+            Income tmp = new Income(idSelector.getValue().toString(),
                     (Integer) moneySpinner.getValue(),dateDatePicker.getValue());
             Loader.storage.getIncomes().add(tmp);
             myList.getItems().add(Loader.storage.getIncomes().
