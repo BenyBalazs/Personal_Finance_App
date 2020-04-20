@@ -25,7 +25,7 @@ public class PrimaryController {
     @FXML
     ChoiceBox expenseOrIncome;
     @FXML
-    ComboBox idSelector;
+    ComboBox nameField;
     @FXML
     DatePicker dateDatePicker;
     @FXML
@@ -35,7 +35,7 @@ public class PrimaryController {
     @FXML
     Label expensesSumLabel;
     @FXML
-    ListView myList;
+    ListView listOfRecentlyAdded;
     @FXML
     Button editButton;
     @FXML
@@ -53,7 +53,8 @@ public class PrimaryController {
         Loader.loadIncomeTable();
         update();
     }
-    public void update (){
+
+    private void update (){
 
         incomesSumLabel.setText(Loader.storage.getSumOfIncomes().toString() + " Ft");
         expensesSumLabel.setText(Loader.storage.getSumOfExpenses().toString() + " Ft");
@@ -66,11 +67,35 @@ public class PrimaryController {
 
     }
 
-    void warnMessage(String s){
+    private void warnMessage(String s){
         if(!labelOfWarnMessage.isVisible()){
             labelOfWarnMessage.setVisible(true);
         }
         labelOfWarnMessage.setText(s);
+    }
+    private void createInstanceOfExpense(EntityManager em){
+
+        Expense tmp = new Expense(nameField.getValue().toString(),
+                (Integer) moneySpinner.getValue(), dateDatePicker.getValue());
+        em.getTransaction().begin();
+        em.persist(tmp);
+        em.getTransaction().commit();
+        Loader.storage.getExpenses().add(tmp);
+        listOfRecentlyAdded.getItems().add(Loader.storage.getExpenses().
+                get(Loader.storage.getExpenses().size() - 1).toString());
+        logger.trace("User added a new Expense to the list");
+    }
+    private void createInstanceOfIncome(EntityManager em){
+
+        Income tmp = new Income(nameField.getValue().toString(),
+                (Integer) moneySpinner.getValue(),dateDatePicker.getValue());
+        Loader.storage.getIncomes().add(tmp);
+        em.getTransaction().begin();
+        em.persist(tmp);
+        em.getTransaction().commit();
+        listOfRecentlyAdded.getItems().add(Loader.storage.getIncomes().
+                get(Loader.storage.getIncomes().size() - 1).toString());
+        logger.trace("user added a new Income to the list");
     }
 
     @FXML
@@ -78,35 +103,17 @@ public class PrimaryController {
         EntityManager em = DB.getEntityManager();
         try{
 
-        if (expenseOrIncome.getValue().toString().equals("Kiadás")){
-
-            Expense tmp = new Expense(idSelector.getValue().toString(),
-                    (Integer) moneySpinner.getValue(), dateDatePicker.getValue());
-            em.getTransaction().begin();
-            em.persist(tmp);
-            em.getTransaction().commit();
-            Loader.storage.getExpenses().add(tmp);
-            myList.getItems().add(Loader.storage.getExpenses().
-                    get(Loader.storage.getExpenses().size() - 1).toString());
-            logger.trace("User added a new Expense to the list");
-        }
-        else {
-            Income tmp = new Income(idSelector.getValue().toString(),
-                    (Integer) moneySpinner.getValue(),dateDatePicker.getValue());
-            Loader.storage.getIncomes().add(tmp);
-            em.getTransaction().begin();
-            em.persist(tmp);
-            em.getTransaction().commit();
-            myList.getItems().add(Loader.storage.getIncomes().
-                    get(Loader.storage.getIncomes().size() - 1).toString());
-            logger.trace("user added a new Income to the list");
-        }
-        update();
-        Loader.storage.calculateDistributionExpenses();
-        labelOfWarnMessage.setVisible(false);
+            if (expenseOrIncome.getValue().toString().equals("Kiadás")){
+                createInstanceOfExpense(em);
+            }
+            else {
+                createInstanceOfIncome(em);
+            }
+            update();
+            labelOfWarnMessage.setVisible(false);
 
         } catch (NullPointerException e) {
-            logger.error("No id found ", e);
+            logger.error("Name field was empty ", e);
             warnMessage("A név mező kitöltése kötelező!");
         } catch (VerifyError e){
             logger.error("The Date field was null", e);

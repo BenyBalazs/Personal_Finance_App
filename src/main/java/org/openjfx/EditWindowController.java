@@ -242,6 +242,7 @@ public class EditWindowController  {
             logger.trace("successfully deleted {}", income);
         }catch (Exception e) {logger.error("Cannot delete element {}", income , e);}
     }
+
     @FXML
     public void updateLists(){
         try {

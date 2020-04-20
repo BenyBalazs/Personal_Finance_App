@@ -17,11 +17,9 @@ public class Storage {
 
     private static Logger logger = LoggerFactory.getLogger("Storage.class");
 
-    private ArrayList<Expense> Expenses = new ArrayList<Expense>() ;
-    private ArrayList<Income> Incomes = new ArrayList<Income>();
+    private ArrayList<Expense> arrayListOfExpenses = new ArrayList<Expense>() ;
+    private ArrayList<Income> arrayListOfIncomes = new ArrayList<Income>();
     private ArrayList<Distribution> eDist;
-    public Integer primaryKeyForExpenses = 0;
-    public Integer primaryKeyForIncomes = 0;
 
     Integer Balance(){ return getTheSumOfIncomes() - getTheSumOfExpenses();}
 
@@ -29,7 +27,7 @@ public class Storage {
 
     public void calculateDistributionExpenses(){
 
-        String[] myArray =  Expenses.stream()
+        String[] myArray =  arrayListOfExpenses.stream()
                 .map(Expense::getName).distinct().toArray(String[]::new);
         eDist = mapInitializer(myArray);
 
@@ -64,7 +62,7 @@ public class Storage {
 
     private Integer valueLoader (String name){
 
-       Integer[] sumArray = Expenses.stream()
+       Integer[] sumArray = arrayListOfExpenses.stream()
                .filter(Expense -> Expense.getName() == name)
                .map(Expense::getAmount).toArray(Integer[]::new);
        logger.debug("Integers in sumArray" + sumArray );
@@ -75,8 +73,8 @@ public class Storage {
     private Integer getTheSumOfExpenses(){
         Integer tmp = 0;
 
-        for (int i = 0; i < Expenses.size(); i++){
-            tmp += Expenses.get(i).getAmount();
+        for (int i = 0; i < arrayListOfExpenses.size(); i++){
+            tmp += arrayListOfExpenses.get(i).getAmount();
         }
         return tmp;
     }
@@ -84,32 +82,22 @@ public class Storage {
     private Integer getTheSumOfIncomes(){
         Integer tmp = 0;
 
-        for (int i = 0; i < Incomes.size(); i++){
-            tmp += Incomes.get(i).getAmount();
+        for (int i = 0; i < arrayListOfIncomes.size(); i++){
+            tmp += arrayListOfIncomes.get(i).getAmount();
         }
         return tmp;
     }
 
-    public void deleteElementFormExpenseList(int primaryKey){
-        for (int i = 0; i < Expenses.size(); i++){}
-    }
-
-    public Integer getPrimaryKeyForExpenses() {
-        primaryKeyForExpenses++;
-        return primaryKeyForExpenses;
-    }
-
-    public Integer getPrimaryKeyForIncomes() {
-        primaryKeyForIncomes++;
-        return primaryKeyForIncomes;
-    }
+    /*public void deleteElementFormExpenseList(int primaryKey){
+        for (int i = 0; i < arrayListOfExpenses.size(); i++){}
+    }*/
 
     public ArrayList<Expense> getExpenses() {
-        return Expenses;
+        return arrayListOfExpenses;
     }
 
     public ArrayList<Income> getIncomes() {
-        return Incomes;
+        return arrayListOfIncomes;
     }
 
     public Integer getSumOfExpenses() {
@@ -126,11 +114,11 @@ public class Storage {
         return eDist;
     }
 
-    public void setExpenses(Collection expenses) {
-        Expenses = (ArrayList<Expense>) expenses;
+    public void setExpenses(Collection arraylistofexpenses) {
+        arrayListOfExpenses = (ArrayList<Expense>) arraylistofexpenses;
     }
 
-    public void setIncomes(Collection incomes) {
-        Incomes = (ArrayList<Income>) incomes;
+    public void setIncomes(Collection arraylistofincomes) {
+        arrayListOfIncomes = (ArrayList<Income>) arraylistofincomes;
     }
 }
