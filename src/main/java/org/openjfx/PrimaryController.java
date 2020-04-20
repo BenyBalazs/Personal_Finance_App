@@ -129,6 +129,12 @@ public class PrimaryController {
             stage.setScene(scene);
             stage.setTitle("Szerkesztés");
             stage.show();
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent windowEvent) {
+                    update();
+                }
+            });
             logger.trace("User opened the EditWindow");
         }catch (Exception e){
             logger.error("Error when trying to open new EditWindow: " ,e);

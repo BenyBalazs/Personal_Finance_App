@@ -227,16 +227,21 @@ public class EditWindowController  {
     }
 
     private void deleteFromExp(TableView tableView,Expense expense){
+        try {
             tableView.getItems().remove(expense);
             DB.removeExp(expense);
             Loader.storage.getExpenses().remove(expense);
+            logger.trace("successfully deleted {}", expense ,expense);
+        }catch (Exception e){logger.error("Cannot delete element {}", e);}
     }
-    private void deleteFromInc(TableView tableView,Income income){
-        tableView.getItems().remove(income);
-        DB.removeInc(income);
-        Loader.storage.getIncomes().remove(income);
+    private void deleteFromInc(TableView tableView,Income income) {
+        try {
+            tableView.getItems().remove(income);
+            DB.removeInc(income);
+            Loader.storage.getIncomes().remove(income);
+            logger.trace("successfully deleted {}", income);
+        }catch (Exception e) {logger.error("Cannot delete element {}", income , e);}
     }
-
     @FXML
     public void updateLists(){
         try {

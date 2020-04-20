@@ -31,14 +31,14 @@ public class DB {
     public static void removeExp(Expense expense){
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
-        em.remove(expense);
+        em.remove(em.contains(expense) ? expense : em.merge(expense));
         em.getTransaction().commit();
         em.close();
     }
     public static void removeInc(Income income){
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
-        em.remove(income);
+        em.remove(em.contains(income) ? income : em.merge(income));
         em.getTransaction().commit();
         em.close();
     }
