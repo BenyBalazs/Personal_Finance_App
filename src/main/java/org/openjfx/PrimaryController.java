@@ -1,8 +1,10 @@
 package org.openjfx;
 
+import Database.DB;
 import Database.Loader;
 import Modells.Expense;
 import Modells.Income;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,9 +12,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.EntityManager;
 
 
 public class PrimaryController {
@@ -46,9 +50,10 @@ public class PrimaryController {
 
     public void initialize(){
         Loader.loadExpenseTable();
+        Loader.loadIncomeTable();
         update();
     }
-    private void update (){
+    public void update (){
 
         incomesSumLabel.setText(Loader.storage.getSumOfIncomes().toString() + " Ft");
         expensesSumLabel.setText(Loader.storage.getSumOfExpenses().toString() + " Ft");
@@ -70,12 +75,16 @@ public class PrimaryController {
 
     @FXML
     public void addElementToList() {
-
+        EntityManager em = DB.getEntityManager();
         try{
 
         if (expenseOrIncome.getValue().toString().equals("Kiadás")){
+
             Expense tmp = new Expense(idSelector.getValue().toString(),
                     (Integer) moneySpinner.getValue(), dateDatePicker.getValue());
+            em.getTransaction().begin();
+            em.persist(tmp);
+            em.getTransaction().commit();
             Loader.storage.getExpenses().add(tmp);
             myList.getItems().add(Loader.storage.getExpenses().
                     get(Loader.storage.getExpenses().size() - 1).toString());
@@ -85,6 +94,9 @@ public class PrimaryController {
             Income tmp = new Income(idSelector.getValue().toString(),
                     (Integer) moneySpinner.getValue(),dateDatePicker.getValue());
             Loader.storage.getIncomes().add(tmp);
+            em.getTransaction().begin();
+            em.persist(tmp);
+            em.getTransaction().commit();
             myList.getItems().add(Loader.storage.getIncomes().
                     get(Loader.storage.getIncomes().size() - 1).toString());
             logger.trace("user added a new Income to the list");
@@ -102,6 +114,8 @@ public class PrimaryController {
         } catch (Exception e){
             logger.error("@Something went wrong {}", e);
             warnMessage("Valami tönkrement hoppá");
+        }finally {
+            em.close();
         }
     }
 
@@ -132,6 +146,12 @@ public class PrimaryController {
             stage.setResizable(false);
             stage.sizeToScene();
             stage.show();
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent windowEvent) {
+                    update();
+                }
+            });
             logger.trace("Function called  openPieChartWindow");
         }catch (Exception e) {
             logger.error("Error when trying to PieChartWindow: " ,e);

@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
+import org.openjfx.PrimaryController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,6 +33,7 @@ public class Income {
     public Income (){}
 
     public Income(String name, Integer amount, LocalDate dayOfAdd) {
+        PrimaryKey = getPrimaryKey();
         Name = name;
         Amount = amount;
         DayOfAdd = dateNullChecker(dayOfAdd);

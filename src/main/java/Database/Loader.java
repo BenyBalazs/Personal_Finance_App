@@ -1,6 +1,7 @@
 package Database;
 
 import Modells.Expense;
+import Modells.Income;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,14 +21,23 @@ public final class Loader {
 
     public static Storage storage = new Storage();
 
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("test");
-
     public static void loadExpenseTable(){
         try{
             logger.debug("starting to load data");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = DB.getEntityManager();
             Query q = em.createQuery("SELECT e from Expense e", Expense.class);
             storage.setExpenses(q.getResultList());
+            logger.debug("finished loading data {} ", q.getResultList().size());
+
+        }catch (Exception e){logger.error("Oop database error {} " );}
+    }
+
+    public static void loadIncomeTable(){
+        try{
+            logger.debug("starting to load data");
+            EntityManager em = DB.getEntityManager();
+            Query q = em.createQuery("SELECT e from Income e", Income.class);
+            storage.setIncomes(q.getResultList());
             logger.debug("finished loading data {} ", q.getResultList().size());
 
         }catch (Exception e){logger.error("Oop database error {} " );}

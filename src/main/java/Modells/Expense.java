@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class Expense{
 
    @Id
-   @GeneratedValue
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name = "PrimaryKey")
    private Integer PrimaryKey;
    @Column(name="Name")
@@ -28,13 +28,12 @@ public class Expense{
 
    public Expense(){}
    public Expense(String name, Integer amount, LocalDate dayOfAdd) {
+        PrimaryKey = getPrimaryKey();
         Name = name;
         Amount = amount;
         DayOfAdd = dateNullChecker(dayOfAdd);
     }
 
-    public Expense(int i) {
-    }
 
     private LocalDate dateNullChecker(LocalDate dayOfAdd)throws VerifyError {
 

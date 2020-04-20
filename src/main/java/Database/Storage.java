@@ -7,6 +7,7 @@ import org.hibernate.annotations.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -129,7 +130,7 @@ public class Storage {
         Expenses = (ArrayList<Expense>) expenses;
     }
 
-    public void setIncomes(ArrayList<Income> incomes) {
-        Incomes = incomes;
+    public void setIncomes(Collection incomes) {
+        Incomes = (ArrayList<Income>) incomes;
     }
 }

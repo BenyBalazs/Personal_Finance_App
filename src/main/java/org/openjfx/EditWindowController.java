@@ -1,8 +1,11 @@
 package org.openjfx;
 
+import Database.DB;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -16,6 +19,7 @@ import Modells.Income;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDate;
 
 public class EditWindowController  {
@@ -40,10 +44,10 @@ public class EditWindowController  {
     private TableColumn<Expense, Integer> colExpAmount;
 
     @FXML
-    private TableColumn<Button, Button> colExpDelete;
+    private TableColumn<Expense, Expense> colExpDelete;
 
     @FXML
-    private TableColumn<Income, Button> colIncDelete;
+    private TableColumn<Income, Income> colIncDelete;
 
     @FXML
     private TableColumn<Income, String> colIncName;
@@ -70,6 +74,7 @@ public class EditWindowController  {
         colExpName.setCellValueFactory(new PropertyValueFactory<Expense,String>("Name"));
         colExpDate.setCellValueFactory(new PropertyValueFactory<Expense,LocalDate>("DayOfAdd"));
         colExpAmount.setCellValueFactory(new PropertyValueFactory<Expense,Integer>("Amount"));
+        colExpDelete.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 
         editableExpCols();
     }
@@ -79,6 +84,7 @@ public class EditWindowController  {
         colIncName.setCellValueFactory(new PropertyValueFactory<Income,String>("Name"));
         colIncDate.setCellValueFactory(new PropertyValueFactory<Income,LocalDate>("DayOfAdd"));
         colIncAmount.setCellValueFactory(new PropertyValueFactory<Income,Integer>("Amount"));
+        colIncDelete.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 
         editableIncCols();
     }
@@ -89,9 +95,12 @@ public class EditWindowController  {
         colExpName.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Expense, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Expense, String> expStringCellEditEvent) {
-                expStringCellEditEvent.getTableView().getItems().
-                        get(expStringCellEditEvent.getTablePosition().getRow()).
-                        setName(expStringCellEditEvent.getNewValue());
+                Expense tmp = expStringCellEditEvent.getTableView().getItems().
+                        get(expStringCellEditEvent.getTablePosition().getRow());
+                tmp.setName(expStringCellEditEvent.getNewValue());
+
+                DB.commitExpChange(tmp);
+
             }
         });
 
@@ -99,9 +108,11 @@ public class EditWindowController  {
         colExpDate.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Expense, LocalDate>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Expense, LocalDate> expLocalDateCellEditEvent) {
-                expLocalDateCellEditEvent.getTableView().getItems().
-                        get(expLocalDateCellEditEvent.getTablePosition().getRow()).
-                        setDayOfAdd(expLocalDateCellEditEvent.getNewValue());
+               Expense tmp = expLocalDateCellEditEvent.getTableView().getItems().
+                        get(expLocalDateCellEditEvent.getTablePosition().getRow());
+               tmp.setDayOfAdd(expLocalDateCellEditEvent.getNewValue());
+
+               DB.commitExpChange(tmp);
             }
         });
 
@@ -109,9 +120,28 @@ public class EditWindowController  {
         colExpAmount.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Expense, Integer>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Expense, Integer> expIntegerCellEditEvent) {
-                expIntegerCellEditEvent.getTableView().getItems().
-                        get(expIntegerCellEditEvent.getTablePosition().getRow()).
-                        setAmount(expIntegerCellEditEvent.getNewValue());
+               Expense tmp = expIntegerCellEditEvent.getTableView().getItems().
+                        get(expIntegerCellEditEvent.getTablePosition().getRow());
+               tmp.setAmount(expIntegerCellEditEvent.getNewValue());
+
+               DB.commitExpChange(tmp);
+            }
+        });
+
+        colExpDelete.setCellFactory(param -> new TableCell<Expense,Expense>(){
+            private final Button deleteButton = new Button("Töröl");
+
+            @Override
+            protected void updateItem(Expense expense, boolean empty){
+                super.updateItem(expense,empty);
+
+                if(expense == null){
+                    setGraphic(null);
+                    return;
+                }
+                setGraphic(deleteButton);
+                deleteButton.setOnAction(actionEvent -> deleteFromExp(getTableView(),expense)
+                        );
             }
         });
 
@@ -124,9 +154,11 @@ public class EditWindowController  {
         colIncName.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Income, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Income, String> incStringCellEditEvent) {
-                incStringCellEditEvent.getTableView().getItems().
-                        get(incStringCellEditEvent.getTablePosition().getRow()).
-                        setName(incStringCellEditEvent.getNewValue());
+                Income tmp =incStringCellEditEvent.getTableView().getItems().
+                        get(incStringCellEditEvent.getTablePosition().getRow());
+                tmp.setName(incStringCellEditEvent.getNewValue());
+
+                DB.commitIncChange(tmp);
             }
         });
 
@@ -134,9 +166,11 @@ public class EditWindowController  {
         colIncDate.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Income, LocalDate>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Income, LocalDate> incLocalDateCellEditEvent) {
-                    incLocalDateCellEditEvent.getTableView().getItems().
-                            get(incLocalDateCellEditEvent.getTablePosition().getRow()).
-                            setDayOfAdd(incLocalDateCellEditEvent.getNewValue());
+                   Income tmp = incLocalDateCellEditEvent.getTableView().getItems().
+                            get(incLocalDateCellEditEvent.getTablePosition().getRow());
+                   tmp.setDayOfAdd(incLocalDateCellEditEvent.getNewValue());
+
+                   DB.commitIncChange(tmp);
             }
         });
 
@@ -144,9 +178,28 @@ public class EditWindowController  {
         colIncAmount.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Income, Integer>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Income, Integer> incStringCellEditEvent) {
-                incStringCellEditEvent.getTableView().getItems().
-                        get(incStringCellEditEvent.getTablePosition().getRow()).
-                        setAmount(incStringCellEditEvent.getNewValue());
+                Income tmp = incStringCellEditEvent.getTableView().getItems().
+                        get(incStringCellEditEvent.getTablePosition().getRow());
+                tmp.setAmount(incStringCellEditEvent.getNewValue());
+
+                DB.commitIncChange(tmp);
+            }
+        });
+
+        colIncDelete.setCellFactory(param -> new TableCell<Income,Income>(){
+            private final Button deleteButton = new Button("Töröl");
+
+            @Override
+            protected void updateItem(Income income, boolean empty){
+                super.updateItem(income,empty);
+
+                if(income == null){
+                    setGraphic(null);
+                    return;
+                }
+                setGraphic(deleteButton);
+                deleteButton.setOnAction(actionEvent -> deleteFromInc(getTableView(),income)
+                );
             }
         });
 
@@ -171,6 +224,17 @@ public class EditWindowController  {
                 logger.trace("New element was added to the Inc list", expTableInfo);
 
         }catch (Exception e){logger.error("Unknown error: ", e);}
+    }
+
+    private void deleteFromExp(TableView tableView,Expense expense){
+            tableView.getItems().remove(expense);
+            DB.removeExp(expense);
+            Loader.storage.getExpenses().remove(expense);
+    }
+    private void deleteFromInc(TableView tableView,Income income){
+        tableView.getItems().remove(income);
+        DB.removeInc(income);
+        Loader.storage.getIncomes().remove(income);
     }
 
     @FXML
