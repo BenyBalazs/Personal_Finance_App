@@ -33,6 +33,9 @@ public class Expense{
         DayOfAdd = dateNullChecker(dayOfAdd);
     }
 
+    public Expense(int i) {
+    }
+
     private LocalDate dateNullChecker(LocalDate dayOfAdd)throws VerifyError {
 
             logger.trace("We are checking if date is null");

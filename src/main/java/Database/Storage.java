@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class Storage {
@@ -45,7 +46,7 @@ public class Storage {
            }
        }
        for (int i = 0; i<eDist.size();i++){
-           logger.debug("Elements in eDist ArrayList" + eDist.get(i).toString());
+           logger.debug("Elements in eDist ArrayList" + eDist.get(i));
        }
 
     }
@@ -124,7 +125,7 @@ public class Storage {
         return eDist;
     }
 
-    public void setExpenses(List<Expense> expenses) {
+    public void setExpenses(Collection expenses) {
         Expenses = (ArrayList<Expense>) expenses;
     }
 

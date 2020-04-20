@@ -45,7 +45,7 @@ public class PrimaryController {
 
 
     public void initialize(){
-        Loader.updateExpList();
+        Loader.loadExpenseTable();
         update();
     }
     private void update (){
