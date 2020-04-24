@@ -26,31 +26,24 @@ public class Storage {
     public Storage() { }
 
     public void calculateDistributionExpenses(){
-
-        String[] myArray =  arrayListOfExpenses.stream()
-                .map(Expense::getName).distinct().toArray(String[]::new);
-        eDist = mapInitializer(myArray);
+        String[] distinctExpenses = getDistinctExpenses();
+        eDist = initializeDistributions(distinctExpenses);
 
        for (int i = 0; i< eDist.size(); i++) {
-           for (int j = 0; j < myArray.length; j++) {
+           for (int j = 0; j < distinctExpenses.length; j++) {
                try {
-                   if (myArray[j].equals(eDist.get(i).getName())) {
-                       eDist.get(i).setAmount(valueLoader(myArray[i]));
-                       double tmp1 = valueLoader(myArray[i]);
+                   if (distinctExpenses[j].equals(eDist.get(i).getName())) {
+                       eDist.get(i).setAmount(valueLoader(distinctExpenses[i]));
+                       double tmp1 = valueLoader(distinctExpenses[i]);
                        double tmp2 = getTheSumOfExpenses();
                        eDist.get(i).setPercentage( tmp1/tmp2*100 );
                    }
-               } catch (Exception e) {
-               }
+               } catch (Exception e) { }
            }
        }
-       for (int i = 0; i<eDist.size();i++){
-           logger.debug("Elements in eDist ArrayList" + eDist.get(i));
-       }
-
     }
 
-    private ArrayList<Distribution> mapInitializer (String[] myArray){
+    private ArrayList<Distribution> initializeDistributions(String[] myArray){
 
         ArrayList<Distribution> tmp = new ArrayList<>();
         for(int i = 0; myArray.length > i ; i++ ){
@@ -60,7 +53,7 @@ public class Storage {
         return tmp;
     }
 
-    private Integer valueLoader (String name){
+    private Integer valueLoader(String name){
 
        Integer[] sumArray = arrayListOfExpenses.stream()
                .filter(Expense -> Expense.getName() == name)
@@ -68,6 +61,11 @@ public class Storage {
        logger.debug("Integers in sumArray" + sumArray );
        Integer sum = Arrays.stream(sumArray).reduce(0, (a, b) -> a + b);
        return sum;
+    }
+
+    private String[] getDistinctExpenses(){
+        return arrayListOfExpenses.stream()
+                .map(Expense::getName).distinct().toArray(String[]::new);
     }
 
     private Integer getTheSumOfExpenses(){
@@ -88,9 +86,21 @@ public class Storage {
         return tmp;
     }
 
-    /*public void deleteElementFormExpenseList(int primaryKey){
-        for (int i = 0; i < arrayListOfExpenses.size(); i++){}
-    }*/
+    public void addIncome(Income income){
+        arrayListOfIncomes.add(income);
+    }
+
+    public void addExpense(Expense expense){
+        arrayListOfExpenses.add(expense);
+    }
+
+    public void removeExpense(Expense expense){
+        arrayListOfExpenses.remove(expense);
+    }
+
+    public void removeIncome(Income income){
+        arrayListOfIncomes.remove(income);
+    }
 
     public ArrayList<Expense> getExpenses() {
         return arrayListOfExpenses;

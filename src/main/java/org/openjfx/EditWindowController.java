@@ -230,17 +230,21 @@ public class EditWindowController  {
         try {
             tableView.getItems().remove(expense);
             DB.removeExp(expense);
-            Loader.storage.getExpenses().remove(expense);
-            logger.trace("successfully deleted {}", expense ,expense);
-        }catch (Exception e){logger.error("Cannot delete element {}", e);}
+            Loader.storage.removeExpense(expense);
+            logger.trace("successfully deleted {}", expense );
+        }catch (Exception e){
+            logger.error("Cannot delete element {}", e);
+        }
     }
     private void deleteFromInc(TableView tableView,Income income) {
         try {
             tableView.getItems().remove(income);
             DB.removeInc(income);
-            Loader.storage.getIncomes().remove(income);
+            Loader.storage.removeIncome(income);
             logger.trace("successfully deleted {}", income);
-        }catch (Exception e) {logger.error("Cannot delete element {}", income , e);}
+        }catch (Exception e) {
+            logger.error("Cannot delete element {}", income , e);
+        }
     }
 
     @FXML

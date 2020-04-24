@@ -54,60 +54,15 @@ public class PrimaryController {
         update();
     }
 
-    private void update (){
-
-        incomesSumLabel.setText(Loader.storage.getSumOfIncomes().toString() + " Ft");
-        expensesSumLabel.setText(Loader.storage.getSumOfExpenses().toString() + " Ft");
-
-        if(Loader.storage.getBalance()>0)
-            balanceLabel.setTextFill(Paint.valueOf("#12c548"));
-        else
-            balanceLabel.setTextFill(Paint.valueOf("#dc143c"));
-        balanceLabel.setText(Loader.storage.getBalance().toString() + " Ft");
-
-    }
-
-    private void warnMessage(String s){
-        if(!labelOfWarnMessage.isVisible()){
-            labelOfWarnMessage.setVisible(true);
-        }
-        labelOfWarnMessage.setText(s);
-    }
-    private void createInstanceOfExpense(EntityManager em){
-
-        Expense tmp = new Expense(nameField.getValue().toString(),
-                (Integer) moneySpinner.getValue(), dateDatePicker.getValue());
-        em.getTransaction().begin();
-        em.persist(tmp);
-        em.getTransaction().commit();
-        Loader.storage.getExpenses().add(tmp);
-        listOfRecentlyAdded.getItems().add(Loader.storage.getExpenses().
-                get(Loader.storage.getExpenses().size() - 1).toString());
-        logger.trace("User added a new Expense to the list");
-    }
-    private void createInstanceOfIncome(EntityManager em){
-
-        Income tmp = new Income(nameField.getValue().toString(),
-                (Integer) moneySpinner.getValue(),dateDatePicker.getValue());
-        Loader.storage.getIncomes().add(tmp);
-        em.getTransaction().begin();
-        em.persist(tmp);
-        em.getTransaction().commit();
-        listOfRecentlyAdded.getItems().add(Loader.storage.getIncomes().
-                get(Loader.storage.getIncomes().size() - 1).toString());
-        logger.trace("user added a new Income to the list");
-    }
-
     @FXML
     public void addElementToList() {
-        EntityManager em = DB.getEntityManager();
         try{
 
             if (expenseOrIncome.getValue().toString().equals("Kiadás")){
-                createInstanceOfExpense(em);
+                createInstanceOfExpense();
             }
             else {
-                createInstanceOfIncome(em);
+                createInstanceOfIncome();
             }
             update();
             labelOfWarnMessage.setVisible(false);
@@ -121,10 +76,53 @@ public class PrimaryController {
         } catch (Exception e){
             logger.error("@Something went wrong {}", e);
             warnMessage("Valami tönkrement hoppá");
-        }finally {
-            em.close();
         }
     }
+
+    private void createInstanceOfExpense(){
+
+        Expense tmp = new Expense(nameField.getValue().toString(),
+                (Integer) moneySpinner.getValue(), dateDatePicker.getValue());
+        Loader.storage.addExpense(tmp);
+        DB.uploadExpenseToDatabase(tmp);
+        listOfRecentlyAdded.getItems().add(Loader.storage.getExpenses().
+                get(Loader.storage.getExpenses().size() - 1).toString());
+        logger.trace("User added a new Expense to the list");
+    }
+
+
+    private void createInstanceOfIncome(){
+
+        Income tmp = new Income(nameField.getValue().toString(),
+                (Integer) moneySpinner.getValue(),dateDatePicker.getValue());
+        Loader.storage.addIncome(tmp);
+        DB.uploadIncomeToDatabase(tmp);
+        listOfRecentlyAdded.getItems().add(Loader.storage.getIncomes().
+                get(Loader.storage.getIncomes().size() - 1).toString());
+        logger.trace("user added a new Income to the list");
+    }
+
+    private void update(){
+
+        incomesSumLabel.setText(Loader.storage.getSumOfIncomes().toString() + " Ft");
+        expensesSumLabel.setText(Loader.storage.getSumOfExpenses().toString() + " Ft");
+
+        if(Loader.storage.getBalance()>0)
+            balanceLabel.setTextFill(Paint.valueOf("#12c548"));
+        else
+            balanceLabel.setTextFill(Paint.valueOf("#dc143c"));
+
+        balanceLabel.setText(Loader.storage.getBalance().toString() + " Ft");
+
+    }
+
+    private void warnMessage(String s){
+        if(!labelOfWarnMessage.isVisible())
+            labelOfWarnMessage.setVisible(true);
+
+        labelOfWarnMessage.setText(s);
+    }
+
 
     @FXML
     public void openEditWindow(){

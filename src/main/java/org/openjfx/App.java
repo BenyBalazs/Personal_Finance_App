@@ -1,4 +1,5 @@
 package org.openjfx;
+import Database.DB;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,6 +24,7 @@ public class App extends Application {
         stage.setScene(scene);
         stage.setTitle("Kiadásaim");
         stage.show();
+        stage.setOnCloseRequest(windowEvent -> DB.closeEmf());
 
     }
 
