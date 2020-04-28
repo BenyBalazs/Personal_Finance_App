@@ -11,8 +11,9 @@ module org.openjfx {
     requires java.naming;
     requires lombok;
 
+
     opens org.openjfx to javafx.fxml;
-    opens Modells to javafx.base, org.hibernate.orm.core;
+    opens Modells to javafx.base, org.hibernate.orm.core, Database;
     opens Database to javafx.base;
     exports org.openjfx;
 

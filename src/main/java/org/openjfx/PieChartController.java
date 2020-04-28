@@ -18,7 +18,7 @@ public class PieChartController {
 
     public void addElementsToChart() {
         pieChart.getData().clear();
-        Loader.storage.calculateDistributionExpenses();
+        Loader.storage.calculateDistributionOfExpenses();
         ArrayList<Distribution> eDistData = Loader.storage.getDist();
         for (int i = 0; eDistData.size() > i; i++) {
             PieChart.Data tmp = new PieChart.Data(eDistData.get(i).getName(),eDistData.get(i).getPercentage());

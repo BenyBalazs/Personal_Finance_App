@@ -30,7 +30,6 @@ public class Income {
 
     private static Logger logger = LoggerFactory.getLogger("Expense.class");
 
-    public Income (){}
 
     public Income(String name, Integer amount, LocalDate dayOfAdd) {
         PrimaryKey = getPrimaryKey();

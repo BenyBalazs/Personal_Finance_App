@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Data
 @Entity
 @Table(name = "Expenses")
-public class Expense{
+public class Expense implements TypeInterface{
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,6 @@ public class Expense{
 
    private static Logger logger = LoggerFactory.getLogger("Expense.class");
 
-   public Expense(){}
    public Expense(String name, Integer amount, LocalDate dayOfAdd) {
         PrimaryKey = getPrimaryKey();
         Name = name;
