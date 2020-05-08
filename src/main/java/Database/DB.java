@@ -1,7 +1,7 @@
 package Database;
 
-import Models.Expense;
-import Models.Income;
+import Modells.Expense;
+import Modells.Income;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

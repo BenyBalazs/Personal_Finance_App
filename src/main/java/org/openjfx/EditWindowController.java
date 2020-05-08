@@ -9,11 +9,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.converter.LocalDateStringConverter;
 import Database.Loader;
-import Models.Expense;
+import Modells.Expense;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
-import Models.Income;
+import Modells.Income;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

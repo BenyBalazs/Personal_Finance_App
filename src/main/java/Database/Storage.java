@@ -1,9 +1,9 @@
 package Database;
 
 import Logic.DistributionCounter;
-import Models.Distribution;
-import Models.Expense;
-import Models.Income;
+import Modells.Distribution;
+import Modells.Expense;
+import Modells.Income;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

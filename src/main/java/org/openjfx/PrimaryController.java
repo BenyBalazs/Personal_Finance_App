@@ -2,8 +2,8 @@ package org.openjfx;
 
 import Database.DB;
 import Database.Loader;
-import Models.Expense;
-import Models.Income;
+import Modells.Expense;
+import Modells.Income;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

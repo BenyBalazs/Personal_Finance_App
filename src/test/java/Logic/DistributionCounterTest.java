@@ -1,7 +1,7 @@
 package Logic;
 
-import Models.Distribution;
-import Models.Expense;
+import Modells.Distribution;
+import Modells.Expense;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

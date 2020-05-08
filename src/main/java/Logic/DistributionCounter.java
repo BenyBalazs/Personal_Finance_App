@@ -1,7 +1,7 @@
 package Logic;
 
-import Models.Distribution;
-import Models.TypeInterface;
+import Modells.Distribution;
+import Modells.TypeInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
