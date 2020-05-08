@@ -10,22 +10,25 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Main data storage class.
+ * You can store the expenses and the incomes and their distributions here.
+ */
 public class Storage {
 
-    private static Logger logger = LoggerFactory.getLogger("Storage.class");
-
-    private ArrayList<Expense> arrayListOfExpenses = new ArrayList<Expense>() ;
-    private ArrayList<Income> arrayListOfIncomes = new ArrayList<Income>();
+    private ArrayList<Expense> arrayListOfExpenses = new ArrayList<>() ;
+    private ArrayList<Income> arrayListOfIncomes = new ArrayList<>();
     private ArrayList<Distribution> eDist;
-
-    private DistributionCounter<Expense> distributionCounter;
 
     Integer Balance(){ return getTheSumOfIncomes() - getTheSumOfExpenses();}
 
     public Storage() { }
 
+    /**
+     * Uses the DistributionCounter class to calculate and load the distributions into the storage.
+     */
     public void calculateDistributionOfExpenses(){
-        distributionCounter =
+        DistributionCounter<Expense> distributionCounter =
                 new DistributionCounter<>(arrayListOfExpenses);
         eDist = (ArrayList<Distribution>) distributionCounter.calculateDistribution();
 

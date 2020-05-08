@@ -6,6 +6,10 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+/**
+ * Model of an expense. Stores the name of the expense.
+ * The date when the purchase was made and the amount of it.
+ */
 @Data
 @Entity
 @Table(name = "Expenses")

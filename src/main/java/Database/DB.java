@@ -9,6 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+/**
+ * Class for database operations.
+ */
 public final class DB {
 
     private static Logger logger = LoggerFactory.getLogger("DB.class");

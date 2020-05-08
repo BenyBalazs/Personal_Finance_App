@@ -3,6 +3,10 @@ package Modells;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * Contains the name the amount and the percentage.
+ * Datatype for storing the distributions of the expenses/incomes.
+ */
 @Data
 @AllArgsConstructor
 public class Distribution {

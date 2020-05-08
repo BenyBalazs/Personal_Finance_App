@@ -9,6 +9,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * The main logic of the program.
+ * Calculates the distribution of a given list of types that implements the TypeInterface.
+ * @param <T> Data classes that implements the TypeInterface.
+ */
 public class DistributionCounter<T extends TypeInterface> {
 
     private static Logger logger = LoggerFactory.getLogger("DistributionCounter.class");
@@ -17,12 +22,20 @@ public class DistributionCounter<T extends TypeInterface> {
     private List<T> listOfTargets;
     private Integer sumOfExpenses;
 
+    /**
+     * The Constructor you must give it a list to calculate it's distribution.
+     * @param listOfTargets List of object that implements the TypeInterface.
+     */
     public DistributionCounter(List<T> listOfTargets){
         distributionList = new ArrayList<>();
         this.listOfTargets = listOfTargets;
         sumOfExpenses = calculateSum();
     }
 
+    /**
+     * Creates a list form the Distribution objects.
+     * @return a List of Distribution objects.
+     */
     public List<Distribution> calculateDistribution(){
         String[] distinctExpenses = getDistinctElements(listOfTargets);
         distributionList = initializeList(distinctExpenses);
@@ -69,6 +82,10 @@ public class DistributionCounter<T extends TypeInterface> {
         return tmp;
     }
 
+    /**
+     * Calculates the sum of a given list of the correct type.
+     * @return an Integer. The number is the sum of the amounts.
+     */
     public Integer calculateSum(){
        return listOfTargets.stream().map(T::getAmount).reduce(0,Integer::sum);
     }

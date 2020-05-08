@@ -7,6 +7,10 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+/**
+ * Model of an expense. Stores the name of the income.
+ * Stores the date when you got the money and the amount of money that you got.
+ */
 @Data
 @Entity
 @Table(name = "Incomes")
