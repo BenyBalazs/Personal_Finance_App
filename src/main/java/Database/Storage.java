@@ -4,15 +4,11 @@ import Logic.DistributionCounter;
 import Modells.Distribution;
 import Modells.Expense;
 import Modells.Income;
-import org.hibernate.annotations.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 public class Storage {
 

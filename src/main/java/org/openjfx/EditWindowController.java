@@ -4,8 +4,6 @@ import Database.DB;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -19,7 +17,6 @@ import Modells.Income;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDate;
 
 public class EditWindowController  {
@@ -70,25 +67,24 @@ public class EditWindowController  {
 
     private void initExpColumns(){
         //eType.setCellValueFactory(new PropertyValueFactory<Expense,Character>("Type"));
-        colExpId.setCellValueFactory(new PropertyValueFactory<Expense,Integer>("PrimaryKey"));
-        colExpName.setCellValueFactory(new PropertyValueFactory<Expense,String>("Name"));
-        colExpDate.setCellValueFactory(new PropertyValueFactory<Expense,LocalDate>("DayOfAdd"));
-        colExpAmount.setCellValueFactory(new PropertyValueFactory<Expense,Integer>("Amount"));
+        colExpId.setCellValueFactory(new PropertyValueFactory<Expense,Integer>("primaryKey"));
+        colExpName.setCellValueFactory(new PropertyValueFactory<Expense,String>("name"));
+        colExpDate.setCellValueFactory(new PropertyValueFactory<Expense,LocalDate>("dayOfAdd"));
+        colExpAmount.setCellValueFactory(new PropertyValueFactory<Expense,Integer>("amount"));
         colExpDelete.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 
         editableExpCols();
     }
 
     private void initIncColumns(){
-        colIncId.setCellValueFactory(new PropertyValueFactory<Income,Integer>("PrimaryKey"));
-        colIncName.setCellValueFactory(new PropertyValueFactory<Income,String>("Name"));
-        colIncDate.setCellValueFactory(new PropertyValueFactory<Income,LocalDate>("DayOfAdd"));
-        colIncAmount.setCellValueFactory(new PropertyValueFactory<Income,Integer>("Amount"));
+        colIncId.setCellValueFactory(new PropertyValueFactory<Income,Integer>("primaryKey"));
+        colIncName.setCellValueFactory(new PropertyValueFactory<Income,String>("name"));
+        colIncDate.setCellValueFactory(new PropertyValueFactory<Income,LocalDate>("dayOfAdd"));
+        colIncAmount.setCellValueFactory(new PropertyValueFactory<Income,Integer>("amount"));
         colIncDelete.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 
         editableIncCols();
     }
-
 
     private void editableExpCols(){
         colExpName.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -211,7 +207,7 @@ public class EditWindowController  {
 
         try{
                 expTableInfo.setItems(expTableData);
-                logger.trace("New element was added to the Exp list", expTableInfo);
+                logger.trace("New element was added to the Exp list {}", expTableInfo);
 
         }catch (Exception e){logger.error("Unknown error: ", e);}
     }
@@ -233,9 +229,10 @@ public class EditWindowController  {
             Loader.storage.removeExpense(expense);
             logger.trace("successfully deleted {}", expense );
         }catch (Exception e){
-            logger.error("Cannot delete element {}", e);
+            logger.error("Cannot delete element {}", e.getMessage());
         }
     }
+
     private void deleteFromInc(TableView tableView,Income income) {
         try {
             tableView.getItems().remove(income);

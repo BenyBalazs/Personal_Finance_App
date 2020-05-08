@@ -29,7 +29,7 @@ public final class Loader {
             storage.setExpenses(q.getResultList());
             logger.debug("finished loading data {} ", q.getResultList().size());
 
-        }catch (Exception e){logger.error("Oop database error {} " );}
+        }catch (Exception e){logger.error("Oop database error {} ",e.getMessage());}
     }
 
     public static void loadIncomeTable(){
@@ -40,7 +40,7 @@ public final class Loader {
             storage.setIncomes(q.getResultList());
             logger.debug("finished loading data {} ", q.getResultList().size());
 
-        }catch (Exception e){logger.error("Oop database error {} " );}
+        }catch (Exception e){logger.error("Oop database error {} ", e.getMessage());}
     }
 
 }

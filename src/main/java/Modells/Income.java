@@ -1,10 +1,6 @@
 package Modells;
 
-import javafx.scene.control.Button;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicUpdate;
-import org.openjfx.PrimaryController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,28 +10,27 @@ import java.time.LocalDate;
 @Data
 @Entity
 @Table(name = "Incomes")
-@NoArgsConstructor
 public class Income {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PrimaryKey")
-    private Integer PrimaryKey;
+    private Integer primaryKey;
     @Column(name="Name")
-    private String Name;
+    private String name;
     @Column(name = "DayOfAdd")
-    private LocalDate DayOfAdd;
+    private LocalDate dayOfAdd;
     @Column(name = "Amount")
-    private Integer Amount;
+    private Integer amount;
 
     private static Logger logger = LoggerFactory.getLogger("Expense.class");
 
+    public Income(){}
 
     public Income(String name, Integer amount, LocalDate dayOfAdd) {
-        PrimaryKey = getPrimaryKey();
-        Name = name;
-        Amount = amount;
-        DayOfAdd = dateNullChecker(dayOfAdd);
+        this.name = name;
+        this.amount = amount;
+        this.dayOfAdd = dateNullChecker(dayOfAdd);
     }
 
     private LocalDate dateNullChecker(LocalDate dayOfAdd)throws VerifyError {
@@ -46,51 +41,46 @@ public class Income {
             throw new VerifyError("No date was found");
         }
         else {
-            logger.debug("Now returning date with the value of ", dayOfAdd );
+            logger.debug("Now returning date with the value of {}", dayOfAdd );
             return dayOfAdd;
         }
     }
+    public Integer getPrimaryKey() {
+        return this.primaryKey;
+    }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
-    }
-
-    public Integer getPrimaryKey() {
-        return PrimaryKey;
-    }
-
-    public void setPrimaryKey(Integer primaryKey) {
-        PrimaryKey = primaryKey;
+        this.name = name;
     }
 
     public Integer getAmount() {
-        return Amount;
+        return amount;
     }
 
     public void setAmount(Integer amount) {
-        Amount = amount;
+        this.amount = amount;
     }
 
     public LocalDate getDayOfAdd() {
-        return DayOfAdd;
+        return dayOfAdd;
     }
 
-    public void setDayOfAdd(LocalDate dayOfAdd) {
-        DayOfAdd = dateNullChecker(dayOfAdd);
+    public void setDayOfAdd(LocalDate localDate) {
+        this.dayOfAdd = dateNullChecker(localDate);
     }
 
 
     @Override
     public String toString() {
         return "Income{" +
-                "PrimaryKey=" + PrimaryKey +
-                ", Name='" + Name + '\'' +
-                ", Amount=" + Amount +
-                ", DayOfAdd=" + DayOfAdd +
+                "PrimaryKey=" + primaryKey +
+                ", Name='" + name + '\'' +
+                ", Amount=" + amount +
+                ", DayOfAdd=" + dayOfAdd +
                 '}';
     }
 }

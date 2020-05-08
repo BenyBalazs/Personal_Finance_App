@@ -2,45 +2,43 @@ package Modells;
 
 public class Distribution {
 
-    private String Name;
-    private Integer Amount;
-    private Double Percentage;
+    private String name;
+    private Integer amount;
+    private Double percentage;
 
-    public Distribution(String name, Integer amount){
-        Name = name;
-        Amount = amount;
+    public Distribution(String Name, Integer Amount){
+        name = Name;
+        amount = Amount;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public Integer getAmount() {
-        return Amount;
+        return amount;
     }
 
     public void setAmount(Integer amount) {
-        Amount = amount;
+        this.amount = amount;
     }
 
      public void setName(String name) {
-         Name = name;
+         name = name;
      }
 
      public Double getPercentage() {
-         return Percentage;
+         return percentage;
      }
 
      public void setPercentage(Double percentage) {
-         Percentage = percentage;
+         this.percentage = percentage;
      }
 
      @Override
      public String toString() {
-         return "Distribution{" +
-                 "Name='" + Name + '\'' +
-                 ", Amount=" + Amount +
-                 ", Percentage=" + Percentage +
-                 '}';
+         return "Név='" + name +
+                 ", Összeg=" + amount +
+                 ", Százalék=" + Math.floor(percentage);
      }
  }

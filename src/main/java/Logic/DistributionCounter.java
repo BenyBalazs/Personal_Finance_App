@@ -26,29 +26,31 @@ public class DistributionCounter<T extends TypeInterface> {
     }
 
     public List<Distribution> calculateDistribution(){
-        String[] distinctExpenses = getDistinctElements();
+        String[] distinctExpenses = getDistinctElements(listOfTargets);
         distributionList = initializeList(distinctExpenses);
 
         for (int i = 0; i< distributionList.size(); i++) {
-            for (int j = 0; j < distinctExpenses.length; j++) {
+            for ( int j = 0; j < distinctExpenses.length; j++) {
                 try {
-                    if (distinctExpenses[j].equals(distributionList.get(i).getName())) {
+                    if (distinctExpenses[i].equals(distributionList.get(i).getName())) {
                         distributionList.get(i).setAmount(valueLoader(distinctExpenses[i]));
                         double tmp1 = valueLoader(distinctExpenses[i]);
                         double tmp2 = sumOfExpenses;
-                        distributionList.get(i).setPercentage( tmp1/tmp2*100 );
+                        distributionList.get(i).setPercentage(tmp1 / tmp2 * 100);
                     }
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                    logger.error("Unknown error {}", e.getMessage());
+                }
             }
         }
         return distributionList;
     }
 
-    private ArrayList<Distribution> initializeList(String[] myArray){
+    private ArrayList<Distribution> initializeList(String[] distinctExpenses){
 
         ArrayList<Distribution> tmp = new ArrayList<>();
-        for(int i = 0; myArray.length > i ; i++ ){
-            try{ tmp.add(new Distribution(myArray[i],0));
+        for(int i = 0; distinctExpenses.length > i ; i++ ){
+            try{ tmp.add(new Distribution(distinctExpenses[i],0));
             }catch (Exception e){ }
         }
         return tmp;
@@ -57,15 +59,15 @@ public class DistributionCounter<T extends TypeInterface> {
     private Integer valueLoader(String name){
 
         Integer[] sumArray = listOfTargets.stream()
-                .filter(T -> T.getName() == name)
+                .filter(T -> T.getName().equals(name))
                 .map(T::getAmount).toArray(Integer[]::new);
-        logger.debug("Integers in sumArray" + sumArray );
-        Integer sum = Arrays.stream(sumArray).reduce(0, (a, b) -> a + b);
-        return sum;
+        logger.debug("Integers in sumArray" + Arrays.stream(sumArray) );
+        return Arrays.stream(sumArray).reduce(0, Integer::sum);
     }
 
-    private String[] getDistinctElements(){
-        return listOfTargets.stream()
+    private String[] getDistinctElements(List<T> targets){
+        String[] tmp = targets.stream()
                 .map(T::getName).distinct().toArray(String[]::new);
+        return tmp;
     }
 }

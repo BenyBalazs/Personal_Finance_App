@@ -11,10 +11,11 @@ import java.time.LocalDate;
 
 public interface TypeInterface {
 
-    Integer PrimaryKey = 0;
-    String Name = "0";
-    LocalDate DayOfAdd = LocalDate.now();
-    Integer Amount = 0;
+    Integer primaryKey = null;
+    String name = null;
+    LocalDate dayOfAdd = LocalDate.now();
+    Integer amount = 0;
+
 
     private LocalDate dateNullChecker(LocalDate dayOfAdd)throws VerifyError {
 
@@ -26,21 +27,18 @@ public interface TypeInterface {
         }
     }
 
-     Integer getPrimaryKey();
-
-     void setPrimaryKey(Integer primaryKey);
-
      String getName();
 
      void setName(String name);
 
      LocalDate getDayOfAdd();
 
-     void setDayOfAdd(LocalDate dayOfAdd);
+     void setDayOfAdd(LocalDate localDate);
 
      Integer getAmount();
 
      void setAmount(Integer amount);
+
 
 }
 

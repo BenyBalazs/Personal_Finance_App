@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.PieChartController">
+<VBox style="-fx-padding: 10" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.PieChartController">
    <children>
       <TextFlow prefHeight="37.0" prefWidth="600.0" textAlignment="CENTER">
          <children>
@@ -15,13 +15,19 @@
                </font>
             </Label>
          </children></TextFlow>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <PieChart prefHeight="400.0" prefWidth="600.0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0" fx:id="pieChart" />
-         </children></AnchorPane>
       <HBox>
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" text="Diagramm Frissítése"  onAction="#addElementsToChart" />
+            <AnchorPane prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <PieChart fx:id="pieChart" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
+               </children>
+            </AnchorPane>
+            <ListView fx:id="elements" prefHeight="400.0" prefWidth="233.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+         <children>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#addElementsToChart" text="Diagramm Frissítése" />
          </children>
       </HBox>
    </children>
