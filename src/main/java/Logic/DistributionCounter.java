@@ -90,6 +90,10 @@ public class DistributionCounter<T extends TypeInterface> {
        return listOfTargets.stream().map(T::getAmount).reduce(0,Integer::sum);
     }
 
+    /**
+     * Sets the list of the targets of this counting operation.
+     * @param listOfTargets list of object that implements the TypeInterface
+     */
     public void setListOfTargets(Collection<T> listOfTargets) {
         this.listOfTargets = (List<T>) listOfTargets;
         this.sumOfExpenses = calculateSum();

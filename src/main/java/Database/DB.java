@@ -22,6 +22,7 @@ public final class DB {
         return emf.createEntityManager();
     }
 
+
     public static void commitExpChange(Expense expense){
         EntityManager em = getEntityManager();
         try {

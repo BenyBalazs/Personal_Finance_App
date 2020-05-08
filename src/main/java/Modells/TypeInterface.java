@@ -13,17 +13,6 @@ public interface TypeInterface {
     LocalDate dayOfAdd = LocalDate.now();
     Integer amount = 0;
 
-
-    private LocalDate dateNullChecker(LocalDate dayOfAdd)throws VerifyError {
-
-        if (dayOfAdd == null) {
-            throw new VerifyError("No date was found");
-        }
-        else {
-            return dayOfAdd;
-        }
-    }
-
      String getName();
 
      void setName(String name);

@@ -37,6 +37,12 @@ public class Income {
         this.dayOfAdd = dateNullChecker(dayOfAdd);
     }
 
+    /**
+     * Throws VerifyError when trying to set the date to null.
+     * @param dayOfAdd transaction
+     * @return the transaction date
+     * @throws VerifyError When the given parameter is null.
+     */
     private LocalDate dateNullChecker(LocalDate dayOfAdd)throws VerifyError {
 
         logger.trace("We are checking if date is null");
@@ -73,6 +79,11 @@ public class Income {
         return dayOfAdd;
     }
 
+    /**
+     * Sets the date of the transaction. Uses {@code edateNullchecker()}
+     * to determinate weather the date is a date or null.
+     * @param localDate the time of the transaction.
+     */
     public void setDayOfAdd(LocalDate localDate) {
         this.dayOfAdd = dateNullChecker(localDate);
     }

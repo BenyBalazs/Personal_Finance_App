@@ -16,6 +16,9 @@ public final class Loader {
     private static Logger logger = LoggerFactory.getLogger("Loader.class");
     private Loader() { }
 
+    /**
+     * Storage singleton variable. Available through out the program.
+     */
     public static Storage storage = new Storage();
 
     /**
