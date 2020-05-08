@@ -1,18 +1,11 @@
 package Database;
 
-import Modells.Expense;
-import Modells.Income;
-import org.hibernate.Session;
+import Models.Expense;
+import Models.Income;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import java.security.spec.ECField;
-import java.util.ArrayList;
-import java.util.List;
 
 public final class Loader {
 

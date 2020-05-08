@@ -1,14 +1,12 @@
 package Logic;
 
-import Modells.Distribution;
-import Modells.Expense;
-import Modells.TypeInterface;
+import Models.Distribution;
+import Models.TypeInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class DistributionCounter<T extends TypeInterface> {
@@ -16,13 +14,13 @@ public class DistributionCounter<T extends TypeInterface> {
     private static Logger logger = LoggerFactory.getLogger("DistributionCounter.class");
 
     private static List<Distribution> distributionList;
-    List<T> listOfTargets;
-    Integer sumOfExpenses;
+    private List<T> listOfTargets;
+    private Integer sumOfExpenses;
 
-    public DistributionCounter(List<T> listOfTargets, Integer sumofexpenses){
+    public DistributionCounter(List<T> listOfTargets){
         distributionList = new ArrayList<>();
-        sumOfExpenses = sumofexpenses;
         this.listOfTargets = listOfTargets;
+        sumOfExpenses = calculateSum();
     }
 
     public List<Distribution> calculateDistribution(){
@@ -51,7 +49,7 @@ public class DistributionCounter<T extends TypeInterface> {
         ArrayList<Distribution> tmp = new ArrayList<>();
         for(int i = 0; distinctExpenses.length > i ; i++ ){
             try{ tmp.add(new Distribution(distinctExpenses[i],0));
-            }catch (Exception e){ }
+            }catch (Exception e){ logger.error("Failed to create new Distribution: {}", e.getMessage());}
         }
         return tmp;
     }
@@ -61,7 +59,7 @@ public class DistributionCounter<T extends TypeInterface> {
         Integer[] sumArray = listOfTargets.stream()
                 .filter(T -> T.getName().equals(name))
                 .map(T::getAmount).toArray(Integer[]::new);
-        logger.debug("Integers in sumArray" + Arrays.stream(sumArray) );
+        logger.debug("Now retuning the sums");
         return Arrays.stream(sumArray).reduce(0, Integer::sum);
     }
 
@@ -69,5 +67,14 @@ public class DistributionCounter<T extends TypeInterface> {
         String[] tmp = targets.stream()
                 .map(T::getName).distinct().toArray(String[]::new);
         return tmp;
+    }
+
+    public Integer calculateSum(){
+       return listOfTargets.stream().map(T::getAmount).reduce(0,Integer::sum);
+    }
+
+    public void setListOfTargets(Collection<T> listOfTargets) {
+        this.listOfTargets = (List<T>) listOfTargets;
+        this.sumOfExpenses = calculateSum();
     }
 }

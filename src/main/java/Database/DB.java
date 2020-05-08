@@ -1,7 +1,7 @@
 package Database;
 
-import Modells.Expense;
-import Modells.Income;
+import Models.Expense;
+import Models.Income;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +26,7 @@ public final class DB {
             em.merge(expense);
             em.getTransaction().commit();
         }catch (Exception e){
-
+            logger.error("Database error ", e);
         }finally {
             em.close();
         }
@@ -38,7 +38,7 @@ public final class DB {
             em.merge(income);
             em.getTransaction().commit();
         }catch (Exception e){
-
+            logger.error("Database error ", e);
         }finally {
             em.close();
         }

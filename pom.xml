@@ -13,7 +13,7 @@
         </developer>
     </developers>
     <description>
-        This is a dummy description.
+        This program is for managing your finances. You can add edit and remove incomes and expenses. You can display your expenses in a Pie Chart.
     </description>
     <scm>
         <connection></connection>
@@ -22,13 +22,15 @@
     </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>14</maven.compiler.source>
+        <maven.compiler.target>14</maven.compiler.target>
         <log4j.version>2.13.1</log4j.version>
         <logback.version>1.2.3</logback.version>
         <slf4j.version>1.7.30</slf4j.version>
         <tinylog.version>2.1.0</tinylog.version>
         <exec.mainClass>org.openjfx.App</exec.mainClass>
+        <surefire.version>3.0.0-M4</surefire.version>
+        <openclover.version>4.4.1</openclover.version>
     </properties>
     <dependencies>
         <dependency>
@@ -62,7 +64,12 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.19</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.7.0-M1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <profiles>
@@ -130,6 +137,29 @@
                     <execution>
                         <goals>
                             <goal>delombok</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.9.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.openclover</groupId>
+                <artifactId>clover-maven-plugin</artifactId>
+                <version>${openclover.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>instrument</goal>
                         </goals>
                     </execution>
                 </executions>

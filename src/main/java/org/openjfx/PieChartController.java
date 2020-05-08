@@ -3,7 +3,7 @@ package org.openjfx;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import Database.Loader;
-import Modells.Distribution;
+import Models.Distribution;
 import javafx.scene.control.ListView;
 
 import java.util.ArrayList;

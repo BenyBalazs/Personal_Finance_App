@@ -9,11 +9,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.converter.LocalDateStringConverter;
 import Database.Loader;
-import Modells.Expense;
+import Models.Expense;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
-import Modells.Income;
+import Models.Income;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,7 +66,6 @@ public class EditWindowController  {
     }
 
     private void initExpColumns(){
-        //eType.setCellValueFactory(new PropertyValueFactory<Expense,Character>("Type"));
         colExpId.setCellValueFactory(new PropertyValueFactory<Expense,Integer>("primaryKey"));
         colExpName.setCellValueFactory(new PropertyValueFactory<Expense,String>("name"));
         colExpDate.setCellValueFactory(new PropertyValueFactory<Expense,LocalDate>("dayOfAdd"));

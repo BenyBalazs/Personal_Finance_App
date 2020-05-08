@@ -13,7 +13,7 @@ module org.openjfx {
 
 
     opens org.openjfx to javafx.fxml;
-    opens Modells to javafx.base, org.hibernate.orm.core;
+    opens Models to javafx.base, org.hibernate.orm.core;
     opens Database to javafx.base;
 
     exports org.openjfx;

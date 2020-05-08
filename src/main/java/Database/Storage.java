@@ -1,9 +1,9 @@
 package Database;
 
 import Logic.DistributionCounter;
-import Modells.Distribution;
-import Modells.Expense;
-import Modells.Income;
+import Models.Distribution;
+import Models.Expense;
+import Models.Income;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +26,7 @@ public class Storage {
 
     public void calculateDistributionOfExpenses(){
         distributionCounter =
-                new DistributionCounter<>(arrayListOfExpenses, getSumOfExpenses());
+                new DistributionCounter<>(arrayListOfExpenses);
         eDist = (ArrayList<Distribution>) distributionCounter.calculateDistribution();
 
     }

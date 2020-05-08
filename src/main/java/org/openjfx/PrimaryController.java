@@ -2,8 +2,8 @@ package org.openjfx;
 
 import Database.DB;
 import Database.Loader;
-import Modells.Expense;
-import Modells.Income;
+import Models.Expense;
+import Models.Income;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +15,6 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.persistence.EntityManager;
 
 
 public class PrimaryController {
