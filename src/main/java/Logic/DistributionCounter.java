@@ -48,6 +48,8 @@ public class DistributionCounter<T extends TypeInterface> {
                         double tmp1 = valueLoader(distinctExpenses[i]);
                         double tmp2 = sumOfExpenses;
                         distributionList.get(i).setPercentage(tmp1 / tmp2 * 100);
+                        logger.debug("Calculated the distribution of an entity. {}",
+                                distributionList.get(i).toString());
                     }
                 } catch (Exception e) {
                     logger.error("Unknown error {}", e.getMessage());
@@ -62,6 +64,7 @@ public class DistributionCounter<T extends TypeInterface> {
         ArrayList<Distribution> tmp = new ArrayList<>();
         for(int i = 0; distinctExpenses.length > i ; i++ ){
             try{ tmp.add(new Distribution(distinctExpenses[i],0));
+                logger.debug("Created new Distribution");
             }catch (Exception e){ logger.error("Failed to create new Distribution: {}", e.getMessage());}
         }
         return tmp;
@@ -79,6 +82,7 @@ public class DistributionCounter<T extends TypeInterface> {
     private String[] getDistinctElements(List<T> targets){
         String[] tmp = targets.stream()
                 .map(T::getName).distinct().toArray(String[]::new);
+        logger.debug("Now returning distinct names.");
         return tmp;
     }
 
@@ -87,6 +91,7 @@ public class DistributionCounter<T extends TypeInterface> {
      * @return an Integer. The number is the sum of the amounts.
      */
     public Integer calculateSum(){
+        logger.debug("Calculating and returning the sum of expenses.");
        return listOfTargets.stream().map(T::getAmount).reduce(0,Integer::sum);
     }
 

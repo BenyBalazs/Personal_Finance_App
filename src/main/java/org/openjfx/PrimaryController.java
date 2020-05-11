@@ -82,7 +82,7 @@ public class PrimaryController {
         Expense tmp = new Expense(nameField.getValue().toString(),
                 (Integer) moneySpinner.getValue(), dateDatePicker.getValue());
         Loader.storage.addExpense(tmp);
-        DB.uploadExpenseToDatabase(tmp);
+        DB.uploadEntityToDatabase(tmp);
         listOfRecentlyAdded.getItems().add(Loader.storage.getExpenses().
                 get(Loader.storage.getExpenses().size() - 1).toString());
         logger.trace("User added a new Expense to the list");
@@ -94,7 +94,7 @@ public class PrimaryController {
         Income tmp = new Income(nameField.getValue().toString(),
                 (Integer) moneySpinner.getValue(),dateDatePicker.getValue());
         Loader.storage.addIncome(tmp);
-        DB.uploadIncomeToDatabase(tmp);
+        DB.uploadEntityToDatabase(tmp);
         listOfRecentlyAdded.getItems().add(Loader.storage.getIncomes().
                 get(Loader.storage.getIncomes().size() - 1).toString());
         logger.trace("user added a new Income to the list");

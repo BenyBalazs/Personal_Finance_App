@@ -94,7 +94,7 @@ public class EditWindowController  {
                         get(expStringCellEditEvent.getTablePosition().getRow());
                 tmp.setName(expStringCellEditEvent.getNewValue());
 
-                DB.commitExpChange(tmp);
+                DB.commitChange(tmp);
 
             }
         });
@@ -107,7 +107,7 @@ public class EditWindowController  {
                         get(expLocalDateCellEditEvent.getTablePosition().getRow());
                tmp.setDayOfAdd(expLocalDateCellEditEvent.getNewValue());
 
-               DB.commitExpChange(tmp);
+               DB.commitChange(tmp);
             }
         });
 
@@ -119,7 +119,7 @@ public class EditWindowController  {
                         get(expIntegerCellEditEvent.getTablePosition().getRow());
                tmp.setAmount(expIntegerCellEditEvent.getNewValue());
 
-               DB.commitExpChange(tmp);
+               DB.commitChange(tmp);
             }
         });
 
@@ -153,7 +153,7 @@ public class EditWindowController  {
                         get(incStringCellEditEvent.getTablePosition().getRow());
                 tmp.setName(incStringCellEditEvent.getNewValue());
 
-                DB.commitIncChange(tmp);
+                DB.commitChange(tmp);
             }
         });
 
@@ -165,7 +165,7 @@ public class EditWindowController  {
                             get(incLocalDateCellEditEvent.getTablePosition().getRow());
                    tmp.setDayOfAdd(incLocalDateCellEditEvent.getNewValue());
 
-                   DB.commitIncChange(tmp);
+                   DB.commitChange(tmp);
             }
         });
 
@@ -177,7 +177,7 @@ public class EditWindowController  {
                         get(incStringCellEditEvent.getTablePosition().getRow());
                 tmp.setAmount(incStringCellEditEvent.getNewValue());
 
-                DB.commitIncChange(tmp);
+                DB.commitChange(tmp);
             }
         });
 
@@ -208,7 +208,7 @@ public class EditWindowController  {
                 expTableInfo.setItems(expTableData);
                 logger.trace("New element was added to the Exp list {}", expTableInfo);
 
-        }catch (Exception e){logger.error("Unknown error: ", e);}
+        }catch (Exception e){logger.error("Unknown error: {} ", e.getMessage());}
     }
 
     void updateIncList(){
@@ -216,7 +216,7 @@ public class EditWindowController  {
 
         try{
                 incTableInfo.setItems(incTableData);
-                logger.trace("New element was added to the Inc list", expTableInfo);
+                logger.trace("List was updated {}", expTableInfo);
 
         }catch (Exception e){logger.error("Unknown error: ", e);}
     }
@@ -224,7 +224,7 @@ public class EditWindowController  {
     private void deleteFromExp(TableView tableView,Expense expense){
         try {
             tableView.getItems().remove(expense);
-            DB.removeExp(expense);
+            DB.removeEntity(expense);
             Loader.storage.removeExpense(expense);
             logger.trace("successfully deleted {}", expense );
         }catch (Exception e){
@@ -235,7 +235,7 @@ public class EditWindowController  {
     private void deleteFromInc(TableView tableView,Income income) {
         try {
             tableView.getItems().remove(income);
-            DB.removeInc(income);
+            DB.removeEntity(income);
             Loader.storage.removeIncome(income);
             logger.trace("successfully deleted {}", income);
         }catch (Exception e) {
@@ -251,7 +251,7 @@ public class EditWindowController  {
             updateIncList();
             initIncColumns();
         }catch(Exception e){
-            logger.error("Something went wrong during the update of Lists", e);
+            logger.error("Something went wrong during the update of the tables {}", e.getMessage());
         }
     }
 }
