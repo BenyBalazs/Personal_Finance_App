@@ -14,32 +14,13 @@ import java.io.IOException;
 /**
  * JavaFX App
  */
-public class App extends Application {
+public class App  {
 
-    private static Scene scene;
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"));
-        stage.setScene(scene);
-        stage.setTitle("Kiadásaim");
-        stage.show();
-        stage.setOnCloseRequest(windowEvent -> DB.closeEmf());
-
-    }
-
-    public static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-
-    }
 
     public static void main(String[] args) {
-        launch();
+
+        Application.launch(MyApplication.class, args);
     }
 
 }

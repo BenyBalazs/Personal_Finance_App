@@ -2,6 +2,7 @@ package Logic;
 
 import Modells.Distribution;
 import Modells.Expense;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,8 +47,6 @@ public class DistributionCounterTest {
         expected.add(new Distribution("Pizza", 300,50.0 ));
 
         assertEquals(actual, expected);
-
-
     }
 
 }
