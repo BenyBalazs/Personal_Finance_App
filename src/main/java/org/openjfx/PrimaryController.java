@@ -66,14 +66,14 @@ public class PrimaryController {
             labelOfWarnMessage.setVisible(false);
 
         } catch (NullPointerException e) {
-            logger.error("Name field was empty ", e);
-            warnMessage("A név mező kitöltése kötelező!");
+            logger.error("Name field was empty {}", e.getMessage());
+            warnMessage(e.getLocalizedMessage());
         } catch (VerifyError e){
-            logger.error("The Date field was null", e);
-            warnMessage("A dátum mező kitöltése kötelező");
+            logger.error("The Date field was null {}", e.getMessage());
+            warnMessage(e.getLocalizedMessage());
         } catch (Exception e){
-            logger.error("@Something went wrong {}", e);
-            warnMessage("Valami tönkrement hoppá");
+            logger.error("Something went wrong {}", e.getMessage());
+            warnMessage(e.getLocalizedMessage());
         }
     }
 
@@ -97,7 +97,7 @@ public class PrimaryController {
         DB.uploadEntityToDatabase(tmp);
         listOfRecentlyAdded.getItems().add(Loader.storage.getIncomes().
                 get(Loader.storage.getIncomes().size() - 1).toString());
-        logger.trace("user added a new Income to the list");
+        logger.trace("User added a new Income to the list");
     }
 
     private void update(){
@@ -140,7 +140,7 @@ public class PrimaryController {
             });
             logger.trace("User opened the EditWindow");
         }catch (Exception e){
-            logger.error("Error when trying to open new EditWindow: " ,e);
+            logger.error("Error when trying to open new EditWindow: {}" ,e.getMessage());
         }
     }
 

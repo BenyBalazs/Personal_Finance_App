@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public interface TypeInterface {
 
     Integer primaryKey = null;
-    String name = null;
+    String name = "null";
     LocalDate dayOfAdd = LocalDate.now();
     Integer amount = 0;
 

@@ -31,27 +31,28 @@ public class Expense implements TypeInterface{
    public Expense(){}
 
    public Expense(String name, Integer amount, LocalDate dayOfAdd) {
-        this.name = name;
-        this.amount = amount;
-        this.dayOfAdd = dateNullChecker(dayOfAdd);
+        this.name = nullChecker(name);
+        this.amount = nullChecker(amount);
+        this.dayOfAdd = nullChecker(dayOfAdd);
     }
 
     /**
-     * Throws VerifyError when trying to set the date to null.
-     * @param dayOfAdd transaction
-     * @return the transaction date
-     * @throws VerifyError When the given parameter is null.
+     * Generic method for checking if the given parameter is not null.
+     * @param param data to set.
+     * @param <T> anything
+     * @return the parameter
+     * @throws VerifyError if the parameter is null.
      */
-    private LocalDate dateNullChecker(LocalDate dayOfAdd)throws VerifyError {
+    private <T> T nullChecker(T param)throws VerifyError {
 
             logger.trace("We are checking if date is null");
-            if (dayOfAdd == null) {
-                logger.warn("The date field was empty");
-                throw new VerifyError("No date was found");
+            if (param == null) {
+                logger.warn("The field was null.");
+                throw new VerifyError("Null cell was found.");
             }
             else {
-                logger.debug("Now returning date with the value of {}", dayOfAdd );
-                return dayOfAdd;
+                logger.debug("Now returning parameter with the value of {}", param );
+                return param;
             }
    }
      public Integer getPrimaryKey() {
@@ -63,7 +64,7 @@ public class Expense implements TypeInterface{
      }
 
      public void setName(String name) {
-         this.name = name;
+         this.name = nullChecker(name);
      }
 
      public LocalDate getDayOfAdd() {
@@ -76,7 +77,7 @@ public class Expense implements TypeInterface{
      * @param localDate the time of the transaction.
      */
      public void setDayOfAdd(LocalDate localDate) {
-         this.dayOfAdd = dateNullChecker(localDate);
+         this.dayOfAdd = nullChecker(localDate);
      }
 
      public Integer getAmount() {
@@ -84,7 +85,8 @@ public class Expense implements TypeInterface{
      }
 
      public void setAmount(Integer amount) {
-         this.amount = amount;
+
+         this.amount = nullChecker(amount);
      }
 
      @Override
