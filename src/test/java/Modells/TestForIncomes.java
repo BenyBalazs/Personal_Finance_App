@@ -27,6 +27,6 @@ public class TestForIncomes {
     public void testingDateSetterShouldThrowVerifyError(){
         VerifyError verifyError = assertThrows(VerifyError.class, () -> { testIncome.setDayOfAdd(null); } );
 
-        assertEquals("No date was found", verifyError.getMessage());
+        assertEquals("The field was null.", verifyError.getMessage());
     }
 }
