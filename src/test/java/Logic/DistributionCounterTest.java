@@ -26,7 +26,7 @@ public class DistributionCounterTest {
     }
     @AfterEach
     public void tearDown(){
-
+        testData.clear();
     }
 
     @Test
