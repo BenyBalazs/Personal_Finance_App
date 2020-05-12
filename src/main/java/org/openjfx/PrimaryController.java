@@ -4,6 +4,8 @@ import Database.DB;
 import Database.Loader;
 import Modells.Expense;
 import Modells.Income;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,6 +52,7 @@ public class PrimaryController {
         Loader.loadExpenseTable();
         Loader.loadIncomeTable();
         update();
+        setTheListOfTheComboBox();
     }
 
     @FXML
@@ -69,7 +72,7 @@ public class PrimaryController {
             logger.error("Name field was empty {}", e.getMessage());
             warnMessage(e.getLocalizedMessage());
         } catch (VerifyError e){
-            logger.error("The Date field was null {}", e.getMessage());
+            logger.error("A field was empty.");
             warnMessage(e.getLocalizedMessage());
         } catch (Exception e){
             logger.error("Something went wrong {}", e.getMessage());
@@ -82,6 +85,7 @@ public class PrimaryController {
         Expense tmp = new Expense(nameField.getValue().toString(),
                 (Integer) moneySpinner.getValue(), dateDatePicker.getValue());
         Loader.storage.addExpense(tmp);
+        addItemToComboBox(nameField.getValue().toString());
         DB.uploadEntityToDatabase(tmp);
         listOfRecentlyAdded.getItems().add(Loader.storage.getExpenses().
                 get(Loader.storage.getExpenses().size() - 1).toString());
@@ -95,6 +99,7 @@ public class PrimaryController {
                 (Integer) moneySpinner.getValue(),dateDatePicker.getValue());
         Loader.storage.addIncome(tmp);
         DB.uploadEntityToDatabase(tmp);
+        addItemToComboBox(nameField.getValue().toString());
         listOfRecentlyAdded.getItems().add(Loader.storage.getIncomes().
                 get(Loader.storage.getIncomes().size() - 1).toString());
         logger.trace("User added a new Income to the list");
@@ -121,6 +126,20 @@ public class PrimaryController {
         labelOfWarnMessage.setText(s);
     }
 
+    private void addItemToComboBox(String s){
+
+        if(!nameField.getItems().contains(s))
+            nameField.getItems().add(s);
+    }
+    private void setTheListOfTheComboBox(){
+       try{
+           ObservableList<String> fieldList = FXCollections.
+                   observableArrayList(Loader.storage.getDistinctNames());
+        nameField.setItems(fieldList);
+       }catch (Exception e) {
+           logger.error("Something went wrong during list nameField list assignment {}", e.getMessage());
+       }
+    }
 
     @FXML
     public void openEditWindow(){
@@ -133,7 +152,7 @@ public class PrimaryController {
             stage.setTitle("Szerkesztés");
             stage.show();
             stage.setResizable(false);
-            stage.setOnCloseRequest(windowEvent -> update());
+            stage.setOnCloseRequest(windowEvent -> {update(); setTheListOfTheComboBox();});
             logger.trace("User opened the EditWindow");
         }catch (Exception e){
             logger.error("Error when trying to open new EditWindow: {}" ,e.getMessage());
@@ -151,7 +170,7 @@ public class PrimaryController {
             stage.setResizable(false);
             stage.sizeToScene();
             stage.show();
-            stage.setOnCloseRequest(windowEvent -> update());
+            stage.setOnCloseRequest(windowEvent -> {update(); listOfRecentlyAdded.getItems().clear();});
             logger.trace("Function called  openPieChartWindow");
         }catch (Exception e) {
             logger.error("Error when trying to PieChartWindow: " ,e);

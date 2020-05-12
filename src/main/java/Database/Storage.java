@@ -22,6 +22,9 @@ public class Storage {
 
     Integer Balance(){ return getTheSumOfIncomes() - getTheSumOfExpenses();}
 
+    /**
+     * No args constructor for Storage class.
+     */
     public Storage() { }
 
     /**
@@ -33,6 +36,26 @@ public class Storage {
         eDist = (ArrayList<Distribution>) distributionCounter.calculateDistribution();
 
     }
+
+    /**
+     * Calculates the distinct names in the storage.
+     * @return a list with the distinct names in the storage.
+     */
+    public ArrayList<String> getDistinctNames(){
+
+        ArrayList<String> temp = new ArrayList<>();
+
+        for(var item : arrayListOfIncomes)
+            if(!temp.contains(item.getName()))
+                temp.add(item.getName());
+
+        for(var item : arrayListOfExpenses)
+            if(!temp.contains(item.getName()))
+                temp.add(item.getName());
+
+        return temp;
+    }
+
     private Integer getTheSumOfExpenses(){
         Integer tmp = 0;
 
@@ -83,6 +106,10 @@ public class Storage {
         return getTheSumOfIncomes();
     }
 
+    /**
+     * Calculates and returns the balance.
+     * @return all incomes - all expenses.
+     */
     public Integer getBalance(){return Balance();}
 
     public ArrayList<Distribution> getDist() {
