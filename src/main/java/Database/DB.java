@@ -31,14 +31,14 @@ public final class  DB  {
 
     /**
      * Generic method for committing changes to database Entities.
-     * @param enitity to change.
+     * @param entity to change.
      * @param <T> Entity that extends the TypeInterface.
      */
-    public static <T extends TypeInterface> void  commitChange(T enitity){
+    public static <T extends TypeInterface> void  commitChange(T entity){
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            em.merge(enitity);
+            em.merge(entity);
             em.getTransaction().commit();
             logger.debug("Commit changes to the database");
         }catch (Exception e){
@@ -69,7 +69,7 @@ public final class  DB  {
     }
 
     /**
-     * Generic method for deleting Entities form the database
+     * Generic method for deleting Entities form the database.
      * @param entity to delete.
      * @param <T> Entity that extends the TypeInterface.
      */
@@ -88,6 +88,9 @@ public final class  DB  {
         }
     }
 
+    /**
+     * Method to close the emf.
+     */
     public static void closeEmf(){
 
         emf.close();

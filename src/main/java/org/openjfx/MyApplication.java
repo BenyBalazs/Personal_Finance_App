@@ -18,6 +18,7 @@ public class MyApplication extends Application  {
         stage.setScene(scene);
         stage.setTitle("Kiadásaim");
         stage.show();
+        stage.setResizable(false);
         stage.setOnCloseRequest(windowEvent -> DB.closeEmf());
 
     }

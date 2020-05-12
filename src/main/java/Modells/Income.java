@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
- * Model of an expense. Stores the name of the income.
+ * Model of an Income. Stores the name of the income.
  * Stores the date when you got the money and the amount of money that you got.
  */
 @Data
@@ -31,6 +31,12 @@ public class Income implements TypeInterface{
 
     public Income(){}
 
+    /**
+     * The recommended constructor for this class.
+     * @param name the name of the Income.
+     * @param amount the amount of the Income.
+     * @param dayOfAdd the day of the transaction.
+     */
     public Income(String name, Integer amount, LocalDate dayOfAdd) {
         this.name = nullChecker(name);
         this.amount = nullChecker(amount);
@@ -44,7 +50,7 @@ public class Income implements TypeInterface{
      * @return the parameter
      * @throws VerifyError if the parameter is null.
      */
-    private <T> T nullChecker(T param)throws VerifyError {
+    private <T> T nullChecker(T param) throws VerifyError {
 
         logger.trace("We are checking if date is null");
         if (param == null) {
@@ -52,7 +58,7 @@ public class Income implements TypeInterface{
             throw new VerifyError("Null cell was found.");
         }
         else {
-            logger.debug("Now returning date with the value of {}", dayOfAdd );
+            logger.debug("Now returning the field with the value of {}", param );
             return param;
         }
     }
@@ -65,6 +71,11 @@ public class Income implements TypeInterface{
         return name;
     }
 
+    /**
+     * Sets the amount of the transaction.
+     * Uses {@code nullChecker(T param)} to determinate weather the name is valid or null.
+     * @param name the time of the transaction.
+     */
     public void setName(String name) {
 
         this.name = nullChecker(name);
@@ -74,6 +85,11 @@ public class Income implements TypeInterface{
         return amount;
     }
 
+    /**
+     * Sets the amount of the transaction.
+     * Uses {@code nullChecker(T param)} to determinate weather the name is valid or null.
+     * @param amount the time of the transaction.
+     */
     public void setAmount(Integer amount) {
 
         this.amount = nullChecker(amount);
@@ -84,15 +100,14 @@ public class Income implements TypeInterface{
     }
 
     /**
-     * Sets the date of the transaction. Uses {@code edateNullchecker()}
-     * to determinate weather the date is a date or null.
+     * Sets the date of the transaction.
+     * Uses {@code nullChecker(T param)} to determinate weather the date is valid or null.
      * @param localDate the time of the transaction.
      */
     public void setDayOfAdd(LocalDate localDate) {
 
         this.dayOfAdd = nullChecker(localDate);
     }
-
 
     @Override
     public String toString() {

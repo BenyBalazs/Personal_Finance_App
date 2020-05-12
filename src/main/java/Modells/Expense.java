@@ -28,9 +28,19 @@ public class Expense implements TypeInterface{
 
    private static Logger logger = LoggerFactory.getLogger("Expense.class");
 
+    /**
+     * Public no args constructor.
+     * Not recommended.
+     */
    public Expense(){}
 
-   public Expense(String name, Integer amount, LocalDate dayOfAdd) {
+    /**
+     * The recommended constructor for this class.
+     * @param name the name of the Expense.
+     * @param amount the amount of the Expense.
+     * @param dayOfAdd the day of the transaction.
+     */
+    public Expense(String name, Integer amount, LocalDate dayOfAdd) {
         this.name = nullChecker(name);
         this.amount = nullChecker(amount);
         this.dayOfAdd = nullChecker(dayOfAdd);
@@ -43,51 +53,64 @@ public class Expense implements TypeInterface{
      * @return the parameter
      * @throws VerifyError if the parameter is null.
      */
-    private <T> T nullChecker(T param)throws VerifyError {
+    private <T> T nullChecker(T param) throws VerifyError {
 
-            logger.trace("We are checking if date is null");
-            if (param == null) {
-                logger.warn("The field was null.");
-                throw new VerifyError("Null cell was found.");
-            }
-            else {
-                logger.debug("Now returning parameter with the value of {}", param );
-                return param;
-            }
-   }
-     public Integer getPrimaryKey() {
+        logger.trace("We are checking if date is null");
+        if (param == null) {
+            logger.warn("The field was null.");
+            throw new VerifyError("Null cell was found.");
+        }
+        else {
+            logger.debug("Now returning the field with the value of {}", param );
+            return param;
+        }
+    }
+
+    public Integer getPrimaryKey() {
         return this.primaryKey;
     }
 
-     public String getName() {
-         return name;
-     }
+    public String getName() {
+        return name;
+    }
 
-     public void setName(String name) {
-         this.name = nullChecker(name);
-     }
+    /**
+     * Sets the date of the transaction.
+     * Uses {@code nullChecker(T param)} to determinate weather the date is valid or null.
+     * @param name the time of the transaction.
+     */
+    public void setName(String name) {
 
-     public LocalDate getDayOfAdd() {
-         return dayOfAdd;
-     }
+        this.name = nullChecker(name);
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    /**
+     * Sets the date of the transaction.
+     * Uses {@code nullChecker(T param)} to determinate weather the date is valid or null.
+     * @param amount the time of the transaction.
+     */
+    public void setAmount(Integer amount) {
+
+        this.amount = nullChecker(amount);
+    }
+
+    public LocalDate getDayOfAdd() {
+        return dayOfAdd;
+    }
 
     /**
      * Sets the date of the transaction. Uses {@code edateNullchecker()}
      * to determinate weather the date is a date or null.
      * @param localDate the time of the transaction.
      */
-     public void setDayOfAdd(LocalDate localDate) {
-         this.dayOfAdd = nullChecker(localDate);
-     }
+    public void setDayOfAdd(LocalDate localDate) {
 
-     public Integer getAmount() {
-         return amount;
-     }
-
-     public void setAmount(Integer amount) {
-
-         this.amount = nullChecker(amount);
-     }
+        this.dayOfAdd = nullChecker(localDate);
+    }
 
      @Override
     public String toString() {

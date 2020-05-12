@@ -29,4 +29,40 @@ public class TestForIncomes {
 
         assertEquals("Null cell was found.", verifyError.getMessage());
     }
+
+    @Test
+    public void testingConstructorShouldThrowVerifyError(){
+
+        VerifyError verifyError = assertThrows(VerifyError.class, () -> { new Income(null,null,null); } );
+
+        assertEquals("Null cell was found.", verifyError.getMessage());
+    }
+
+    @Test
+    public void testingNameSetterShouldSetTheName(){
+        testIncome.setName("Brekeke");
+
+        assertEquals("Brekeke",testIncome.getName());
+    }
+
+    @Test
+    public void testingNameSetterShouldThrowVerifyError(){
+        VerifyError verifyError = assertThrows(VerifyError.class, () -> { testIncome.setName(null); } );
+
+        assertEquals("Null cell was found.", verifyError.getMessage());
+    }
+
+    @Test
+    public void testingAmountSetterShouldSetTheName(){
+        testIncome.setAmount(2020);
+
+        assertEquals(2020,testIncome.getAmount());
+    }
+
+    @Test
+    public void testingAmountSetterShouldThrowVerifyError(){
+        VerifyError verifyError = assertThrows(VerifyError.class, () -> { testIncome.setAmount(null); } );
+
+        assertEquals("Null cell was found.", verifyError.getMessage());
+    }
 }

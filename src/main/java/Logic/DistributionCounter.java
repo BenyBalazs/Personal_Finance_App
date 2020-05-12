@@ -42,17 +42,14 @@ public class DistributionCounter<T extends TypeInterface> {
 
         for (int i = 0; i< distributionList.size(); i++) {
             for ( int j = 0; j < distinctExpenses.length; j++) {
-                try {
-                    if (distinctExpenses[i].equals(distributionList.get(i).getName())) {
-                        distributionList.get(i).setAmount(valueLoader(distinctExpenses[i]));
-                        double tmp1 = valueLoader(distinctExpenses[i]);
-                        double tmp2 = sumOfExpenses;
-                        distributionList.get(i).setPercentage(tmp1 / tmp2 * 100);
-                        logger.debug("Calculated the distribution of an entity. {}",
-                                distributionList.get(i).toString());
-                    }
-                } catch (Exception e) {
-                    logger.error("Unknown error {}", e.getMessage());
+
+                if (distinctExpenses[i].equals(distributionList.get(i).getName())) {
+                    distributionList.get(i).setAmount(valueLoader(distinctExpenses[i]));
+                    double tmp1 = valueLoader(distinctExpenses[i]);
+                    double tmp2 = sumOfExpenses;
+                    distributionList.get(i).setPercentage(tmp1 / tmp2 * 100);
+                    logger.debug("Calculated the distribution of an entity. {}",
+                            distributionList.get(i).toString());
                 }
             }
         }
