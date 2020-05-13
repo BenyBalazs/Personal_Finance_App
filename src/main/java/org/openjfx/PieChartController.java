@@ -19,9 +19,6 @@ public class PieChartController {
         addElementsToChart();
     }
 
-    /**
-     * dasdasdasdasdasd
-     */
     public void addElementsToChart() {
         pieChart.getData().clear();
         elements.getItems().clear();

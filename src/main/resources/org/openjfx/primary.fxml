@@ -49,7 +49,7 @@
                   <VBox alignment="CENTER">
                      <children>
                         <Label text="Válaszd ki a dátumot" />
-                        <DatePicker fx:id="dateDatePicker" editable="true" />
+                        <DatePicker fx:id="dateDatePicker" editable="false" />
                      </children>
                   </VBox>
                   <Separator orientation="VERTICAL" prefHeight="40" prefWidth="20.0" />
