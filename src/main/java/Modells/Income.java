@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 
 /**
@@ -29,9 +30,13 @@ public class Income implements TypeInterface{
 
     private static Logger logger = LoggerFactory.getLogger("Expense.class");
 
+    /**
+     * Public no args constructor.
+     */
     public Income(){}
 
     /**
+     * Creates a new instance of the Expense class.
      * The recommended constructor for this class.
      * @param name the name of the Income.
      * @param amount the amount of the Income.
@@ -72,9 +77,9 @@ public class Income implements TypeInterface{
     }
 
     /**
-     * Sets the amount of the transaction.
+     * Sets the name of the transaction.
      * Uses {@code nullChecker(T param)} to determinate weather the name is valid or null.
-     * @param name the time of the transaction.
+     * @param name the new name of the transaction.
      */
     public void setName(String name) {
 
@@ -88,11 +93,16 @@ public class Income implements TypeInterface{
     /**
      * Sets the amount of the transaction.
      * Uses {@code nullChecker(T param)} to determinate weather the name is valid or null.
-     * @param amount the time of the transaction.
+     * @param amount new value to override the existing one.
      */
     public void setAmount(Integer amount) {
 
-        this.amount = nullChecker(amount);
+        Integer temp = nullChecker(amount);
+
+        if(0 > temp)
+            throw new VerifyError("The amount field cannot be lower than 0");
+
+        this.amount = temp;
     }
 
     public LocalDate getDayOfAdd() {
@@ -102,7 +112,7 @@ public class Income implements TypeInterface{
     /**
      * Sets the date of the transaction.
      * Uses {@code nullChecker(T param)} to determinate weather the date is valid or null.
-     * @param localDate the time of the transaction.
+     * @param localDate the  new time of the transaction.
      */
     public void setDayOfAdd(LocalDate localDate) {
 

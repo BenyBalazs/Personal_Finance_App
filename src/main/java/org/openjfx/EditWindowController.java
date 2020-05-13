@@ -61,6 +61,9 @@ public class EditWindowController  {
     @FXML
     Button listUpdaterButton;
 
+    @FXML
+    Label errorMessage;
+
     public void initialize(){
         updateLists();
     }
@@ -90,12 +93,18 @@ public class EditWindowController  {
         colExpName.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Expense, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Expense, String> expStringCellEditEvent) {
-                Expense tmp = expStringCellEditEvent.getTableView().getItems().
-                        get(expStringCellEditEvent.getTablePosition().getRow());
-                tmp.setName(expStringCellEditEvent.getNewValue());
+                try {
+                    Expense tmp = expStringCellEditEvent.getTableView().getItems().
+                            get(expStringCellEditEvent.getTablePosition().getRow());
+                    tmp.setName(expStringCellEditEvent.getNewValue());
 
-                DB.commitChange(tmp);
-
+                    DB.commitChange(tmp);
+                    logger.trace("User changed the name field. New value: {}", tmp.getName());
+                    errorMessage.setVisible(false);
+                }catch (Exception e){
+                    sendErrorMessage(e.getLocalizedMessage());
+                    logger.error("Something went wrong: {}", e.getMessage());
+                }
             }
         });
 
@@ -103,11 +112,18 @@ public class EditWindowController  {
         colExpDate.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Expense, LocalDate>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Expense, LocalDate> expLocalDateCellEditEvent) {
-               Expense tmp = expLocalDateCellEditEvent.getTableView().getItems().
-                        get(expLocalDateCellEditEvent.getTablePosition().getRow());
-               tmp.setDayOfAdd(expLocalDateCellEditEvent.getNewValue());
+               try {
+                   Expense tmp = expLocalDateCellEditEvent.getTableView().getItems().
+                           get(expLocalDateCellEditEvent.getTablePosition().getRow());
+                   tmp.setDayOfAdd(expLocalDateCellEditEvent.getNewValue());
 
-               DB.commitChange(tmp);
+                   DB.commitChange(tmp);
+                   logger.trace("User changed the dayOfAdd field. New value: {}", tmp.getDayOfAdd());
+                   errorMessage.setVisible(false);
+               }catch (Exception e){
+                   sendErrorMessage(e.getLocalizedMessage());
+                   logger.error("Something went wrong: {}", e.getMessage());
+               }
             }
         });
 
@@ -115,11 +131,18 @@ public class EditWindowController  {
         colExpAmount.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Expense, Integer>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Expense, Integer> expIntegerCellEditEvent) {
-               Expense tmp = expIntegerCellEditEvent.getTableView().getItems().
-                        get(expIntegerCellEditEvent.getTablePosition().getRow());
-               tmp.setAmount(expIntegerCellEditEvent.getNewValue());
+              try {
+                  Expense tmp = expIntegerCellEditEvent.getTableView().getItems().
+                          get(expIntegerCellEditEvent.getTablePosition().getRow());
+                  tmp.setAmount(expIntegerCellEditEvent.getNewValue());
 
-               DB.commitChange(tmp);
+                  DB.commitChange(tmp);
+                  logger.trace("User changed the dayOfAdd field. New value: {}", tmp.getAmount());
+                  errorMessage.setVisible(false);
+              }catch (Exception e){
+                  sendErrorMessage(e.getLocalizedMessage());
+                  logger.error("Something went wrong: {}", e.getMessage());
+              }
             }
         });
 
@@ -149,11 +172,18 @@ public class EditWindowController  {
         colIncName.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Income, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Income, String> incStringCellEditEvent) {
-                Income tmp =incStringCellEditEvent.getTableView().getItems().
-                        get(incStringCellEditEvent.getTablePosition().getRow());
-                tmp.setName(incStringCellEditEvent.getNewValue());
+                try {
+                    Income tmp = incStringCellEditEvent.getTableView().getItems().
+                            get(incStringCellEditEvent.getTablePosition().getRow());
+                    tmp.setName(incStringCellEditEvent.getNewValue());
 
-                DB.commitChange(tmp);
+                    DB.commitChange(tmp);
+                    logger.trace("User changed the name field. New value: {}", tmp.getName());
+                    errorMessage.setVisible(false);
+                }catch (Exception e){
+                    sendErrorMessage(e.getLocalizedMessage());
+                    logger.error("Something went wrong: {}", e.getMessage());
+                }
             }
         });
 
@@ -161,11 +191,20 @@ public class EditWindowController  {
         colIncDate.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Income, LocalDate>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Income, LocalDate> incLocalDateCellEditEvent) {
-                   Income tmp = incLocalDateCellEditEvent.getTableView().getItems().
+                try {
+                    Income tmp = incLocalDateCellEditEvent.getTableView().getItems().
                             get(incLocalDateCellEditEvent.getTablePosition().getRow());
-                   tmp.setDayOfAdd(incLocalDateCellEditEvent.getNewValue());
+                    tmp.setDayOfAdd(incLocalDateCellEditEvent.getNewValue());
 
-                   DB.commitChange(tmp);
+                    DB.commitChange(tmp);
+
+                    logger.trace("User changed the dayOfAdd field. New value: {}", tmp.getDayOfAdd());
+                    errorMessage.setVisible(false);
+                }catch (Exception e){
+                    sendErrorMessage(e.getLocalizedMessage());
+                    logger.error("Something went wrong: {}", e.getMessage());
+                }
+
             }
         });
 
@@ -173,11 +212,18 @@ public class EditWindowController  {
         colIncAmount.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Income, Integer>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Income, Integer> incStringCellEditEvent) {
-                Income tmp = incStringCellEditEvent.getTableView().getItems().
-                        get(incStringCellEditEvent.getTablePosition().getRow());
-                tmp.setAmount(incStringCellEditEvent.getNewValue());
+                try {
+                    Income tmp = incStringCellEditEvent.getTableView().getItems().
+                            get(incStringCellEditEvent.getTablePosition().getRow());
+                    tmp.setAmount(incStringCellEditEvent.getNewValue());
 
-                DB.commitChange(tmp);
+                    DB.commitChange(tmp);
+                    logger.trace("User changed the amount field. new value: {}", tmp.getAmount());
+                    errorMessage.setVisible(false);
+                }catch (Exception e){
+                    sendErrorMessage(e.getLocalizedMessage());
+                    logger.error("Something went wrong: {}", e.getMessage());
+                }
             }
         });
 
@@ -253,5 +299,13 @@ public class EditWindowController  {
         }catch(Exception e){
             logger.error("Something went wrong during the update of the tables {}", e.getMessage());
         }
+    }
+
+    private void sendErrorMessage(String s){
+
+        if(!errorMessage.isVisible()){
+            errorMessage.setVisible(true);
+        }
+            errorMessage.setText(s);
     }
 }

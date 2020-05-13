@@ -30,11 +30,11 @@ public class Expense implements TypeInterface{
 
     /**
      * Public no args constructor.
-     * Not recommended.
      */
    public Expense(){}
 
     /**
+     * Creates a new instance of the Expense class.
      * The recommended constructor for this class.
      * @param name the name of the Expense.
      * @param amount the amount of the Expense.
@@ -75,9 +75,9 @@ public class Expense implements TypeInterface{
     }
 
     /**
-     * Sets the date of the transaction.
-     * Uses {@code nullChecker(T param)} to determinate weather the date is valid or null.
-     * @param name the time of the transaction.
+     * Sets the name of the bought product.
+     * Uses {@code nullChecker(T param)} to determinate weather the name is value or null.
+     * @param name is the name you want to override the current name.
      */
     public void setName(String name) {
 
@@ -89,13 +89,19 @@ public class Expense implements TypeInterface{
     }
 
     /**
-     * Sets the date of the transaction.
-     * Uses {@code nullChecker(T param)} to determinate weather the date is valid or null.
-     * @param amount the time of the transaction.
+     * Sets the amount of money spent in a product.
+     * Uses {@code nullChecker(T param)} to determinate weather the amount is a value or null.
+     * @param amount is the amount of money to override the current one
+     * @throws VerifyError if the value is lower than 0.
      */
-    public void setAmount(Integer amount) {
+    public void setAmount(Integer amount) throws VerifyError {
 
-        this.amount = nullChecker(amount);
+        Integer temp = nullChecker(amount);
+
+        if(0 > temp)
+            throw new VerifyError("The amount field cannot be lower than 0");
+
+        this.amount = temp;
     }
 
     public LocalDate getDayOfAdd() {
@@ -103,8 +109,8 @@ public class Expense implements TypeInterface{
     }
 
     /**
-     * Sets the date of the transaction. Uses {@code edateNullchecker()}
-     * to determinate weather the date is a date or null.
+     * Sets the date of the transaction. Uses {@code dateNullChecker()}
+     * to determinate weather the date is a value or null.
      * @param localDate the time of the transaction.
      */
     public void setDayOfAdd(LocalDate localDate) {

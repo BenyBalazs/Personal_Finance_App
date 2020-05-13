@@ -24,14 +24,14 @@ public class TestForIncomes {
     }
 
     @Test
-    public void testingDateSetterShouldThrowVerifyError(){
+    public void testingDateSetterShouldThrowVerifyErrorBecauseNullValue(){
         VerifyError verifyError = assertThrows(VerifyError.class, () -> { testIncome.setDayOfAdd(null); } );
 
         assertEquals("Null cell was found.", verifyError.getMessage());
     }
 
     @Test
-    public void testingConstructorShouldThrowVerifyError(){
+    public void testingConstructorShouldThrowVerifyErrorBecauseNullValue(){
 
         VerifyError verifyError = assertThrows(VerifyError.class, () -> { new Income(null,null,null); } );
 
@@ -46,7 +46,7 @@ public class TestForIncomes {
     }
 
     @Test
-    public void testingNameSetterShouldThrowVerifyError(){
+    public void testingNameSetterShouldThrowVerifyErrorBecauseNullValue(){
         VerifyError verifyError = assertThrows(VerifyError.class, () -> { testIncome.setName(null); } );
 
         assertEquals("Null cell was found.", verifyError.getMessage());
@@ -60,9 +60,16 @@ public class TestForIncomes {
     }
 
     @Test
-    public void testingAmountSetterShouldThrowVerifyError(){
+    public void testingAmountSetterShouldThrowVerifyErrorBecauseNullValue(){
         VerifyError verifyError = assertThrows(VerifyError.class, () -> { testIncome.setAmount(null); } );
 
         assertEquals("Null cell was found.", verifyError.getMessage());
+    }
+
+    @Test
+    public void testingAmountSetterShouldThrowVerifyErrorBecauseSettingValueLowerThanZero(){
+        VerifyError verifyError = assertThrows(VerifyError.class, () -> { testIncome.setAmount(-2020); } );
+
+        assertEquals("The amount field cannot be lower than 0", verifyError.getMessage());
     }
 }
